@@ -1,0 +1,51 @@
+variables:
+     course: csc215
+     professor_email: "Schrader, Roger L. <Roger.Schrader@sdsmt.edu>"
+     labta_email: "David Mathews <David.Mathews@mines.sdsmt.edu>"
+
+     
+# ----------------- Do Not Edit Below This Line -------------------------------
+
+stages:
+  - precheck
+  - test
+  - confirm
+
+Precheck:
+  allow_failure: false
+  stage: precheck
+  tags:
+    - csc215
+  script:
+    - invoke-expression "c:\scripts\checkFiles.ps1"
+    - if( $LASTEXITCODE -ne 0 ) { exit 1 }
+
+
+Grade:
+  stage: test
+  tags: 
+    - csc215
+  script:
+    - invoke-expression "c:\scripts\vstools.ps1"
+    - invoke-expression "c:\scripts\checkFiles.ps1"
+    - invoke-expression "c:\scripts\build.ps1"
+    - if( $LASTEXITCODE -ne 0 ) { exit 1 }
+    - invoke-expression "c:\scripts\eval.ps1"
+    - if( $LASTEXITCODE -ne 0 ) { exit 1 }
+#  artifacts:
+#    paths: 
+#      - data.txt
+#    expire_in: 1 week
+
+
+Email:
+  stage: confirm
+  tags:
+    - csc215
+  script:
+    - invoke-expression "c:\scripts\checkFiles.ps1"
+    - invoke-expression "c:\scripts\$course\sendEmail.ps1"
+    - if( $LASTEXITCODE -ne 0 ) { exit 1 }
+      
+
+
