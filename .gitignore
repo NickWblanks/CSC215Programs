@@ -8,3 +8,8 @@
 *.bin
 *.cvs
 *.data
+*.ppm
+*.pgm
+*.cmd
+*.ps1
+*.bat
