@@ -26,3 +26,24 @@ struct image
 #endif
 
 
+//file io functions
+
+bool openFile(ifstream& fin, char* fileName);
+
+void readAscii(ifstream& fin);
+
+
+//error message functions
+
+void invalidCount(bool check);
+
+void badOption(char* argOpt);
+
+bool cmdCheck(int cmdCount);
+
+bool optionCheck(char* option, char* bNum);
+
+
+
+
+

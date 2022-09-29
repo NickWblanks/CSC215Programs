@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="errorMsg.cpp" />
     <ClCompile Include="imageFileIO.cpp" />
     <ClCompile Include="imageOperations.cpp" />
     <ClCompile Include="memory.cpp" />
