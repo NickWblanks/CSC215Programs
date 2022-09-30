@@ -86,3 +86,9 @@ bool allocBlue(int rows, int columns)
     }
 
 }
+
+bool fillRed();
+
+bool fillGreen();
+
+bool fillBlue();

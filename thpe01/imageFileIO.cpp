@@ -11,8 +11,9 @@ bool openFile(ifstream& fin, char *fileName)
     return true;
 }
 
-void readAscii(ifstream& fin)
+bool readAscii(ifstream& fin)
 {
+    pixel hold;
     int max;
     string com;
     image imgData;
@@ -36,4 +37,20 @@ void readAscii(ifstream& fin)
     cout << imgData.rows << endl;
     cout << imgData.cols << endl;
     cout << max << endl;
+
+   bool redCheck = allocRed(imgData.rows, imgData.cols);
+   if (redCheck == false)
+   {
+       return false;
+   }
+   bool greenCheck = allocGreen(imgData.rows, imgData.cols);
+   if (greenCheck == false)
+   {
+       return false;
+   }
+   bool blueCheck = allocBlue(imgData.rows, imgData.cols);
+   if (blueCheck == false)
+   {
+       return false;
+   }
 }

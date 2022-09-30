@@ -31,7 +31,7 @@ struct image
 
 bool openFile(ifstream& fin, char* fileName);
 
-void readAscii(ifstream& fin);
+bool readAscii(ifstream& fin);
 
 
 //error message functions
