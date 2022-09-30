@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ struct image
 #endif
 
 
-//file io functions
+//file functions
 
 bool openFile(ifstream& fin, char* fileName);
 
@@ -42,6 +43,17 @@ void badOption(char* argOpt);
 bool cmdCheck(int cmdCount);
 
 bool optionCheck(char* option, char* bNum);
+
+// mem allocation functions
+
+bool allocRed(int rows, int columns);
+
+bool allocGreen(int rows, int columns);
+
+bool allocBlue(int rows, int columns);
+
+
+
 
 
 

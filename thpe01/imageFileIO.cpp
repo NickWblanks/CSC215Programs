@@ -13,22 +13,27 @@ bool openFile(ifstream& fin, char *fileName)
 
 void readAscii(ifstream& fin)
 {
+    int max;
+    string com;
     image imgData;
     fin >> imgData.magicNumber;
     if (imgData.magicNumber != "P3")
     {
         imgData.magicNumber = "P3";
     }
-    int com = fin.peek();
-    while(com == 35)
+    fin.ignore();
+    int pk = fin.peek();
+    while (pk == 35)
     {
         getline(fin, imgData.comment, '\n');
-        int com = fin.peek();
+        pk = fin.peek();
     }
     fin >> imgData.rows;
-    fin.ignore();
     fin >> imgData.cols;
+    fin >> max;
     cout << imgData.magicNumber << endl;
+    cout << imgData.comment << endl;
     cout << imgData.rows << endl;
     cout << imgData.cols << endl;
+    cout << max << endl;
 }

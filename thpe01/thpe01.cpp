@@ -12,7 +12,7 @@ int main(int argc, char** argv)
         invalidCount(count);
         return 0;
     }
-    if (argv[1] != "--ascii" && argv[1] != "--binary")
+    if (argv[1] == "--ascii")
     {
         opt = optionCheck(argv[1], argv[2]);
         {
