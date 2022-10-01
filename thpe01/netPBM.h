@@ -53,6 +53,11 @@ bool allocGreen(int rows, int columns);
 bool allocBlue(int rows, int columns);
 
 
+//other functions
+
+int RGB(int flick);
+
+
 
 
 

@@ -24,9 +24,8 @@ bool allocRed(int rows, int columns)
             cout << "Memory Allocation Error" << endl;
             return false;
         }
-        return true;
     }
-
+    return true;
 }
 
 bool allocGreen(int rows, int columns)
@@ -53,9 +52,8 @@ bool allocGreen(int rows, int columns)
             cout << "Memory Allocation Error" << endl;
             return false;
         }
-        return true;
     }
-
+    return true;
 }
 
 bool allocBlue(int rows, int columns)
@@ -82,13 +80,7 @@ bool allocBlue(int rows, int columns)
             cout << "Memory Allocation Error" << endl;
             return false;
         }
-        return true;
     }
-
+    return true;
 }
 
-bool fillRed();
-
-bool fillGreen();
-
-bool fillBlue();

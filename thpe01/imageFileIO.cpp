@@ -13,6 +13,9 @@ bool openFile(ifstream& fin, char *fileName)
 
 bool readAscii(ifstream& fin)
 {
+    int i;
+    int j;
+    int flick = 1;
     pixel hold;
     int max;
     string com;
@@ -52,5 +55,41 @@ bool readAscii(ifstream& fin)
    if (blueCheck == false)
    {
        return false;
+   }
+   while (i < imgData.rows && j < imgData.cols && fin >> hold)
+   {
+       flick = RGB(flick);
+       if (flick == 1)
+       {
+           for (i = 0; i < imgData.rows; i++)
+           {
+               for (j = 0; j < imgData.cols; j++)
+               {
+                   imgData.redgray[i][j] = hold;
+               }
+           }
+       }
+       if (flick == 2)
+       {
+           for (i = 0; i < imgData.rows; i++)
+           {
+               for (j = 0; j < imgData.cols; j++)
+               {
+                   imgData.green[i][j] = hold;
+               }
+           }
+
+       }
+       if (flick == 3)
+       {
+           for (i = 0; i < imgData.rows; i++)
+           {
+               for (j = 0; j < imgData.cols; j++)
+               {
+                   imgData.blue[i][j] = hold;
+               }
+           }
+
+       }
    }
 }
