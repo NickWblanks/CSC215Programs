@@ -31,7 +31,9 @@ struct image
 
 bool openFile(ifstream& fin, char* fileName);
 
-bool readAscii(ifstream& fin);
+bool openOut(ofstream& fout, char* fileName);
+
+bool readWriteAscii(ifstream& fin, ofstream &fout);
 
 
 //error message functions
@@ -46,16 +48,15 @@ bool optionCheck(char* option, char* bNum);
 
 // mem allocation functions
 
-bool allocRed(int rows, int columns);
+pixel** allocRed( int rows, int columns);
 
-bool allocGreen(int rows, int columns);
+pixel** allocGreen( int rows, int columns);
 
-bool allocBlue(int rows, int columns);
+pixel** allocBlue( int rows, int columns);
 
 
 //other functions
 
-int RGB(int flick);
 
 
 

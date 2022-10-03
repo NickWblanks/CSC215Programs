@@ -4,6 +4,7 @@
 int main(int argc, char** argv)
 {
     ifstream fin;
+    ofstream fout;
     bool count;
     bool opt;
     count = cmdCheck(argc);
@@ -28,23 +29,14 @@ int main(int argc, char** argv)
     {
         return 0;
     }
-    readAscii(fin);
+    checkFile = openOut(fout, argv[argc - 2]);
+    bool asc = readWriteAscii(fin, fout);
+    if (asc == false)
+    {
+        return 0;
+    }
+
 
     return 0;
 }
 
-int RGB(int flick)
-{
-    if (flick == 1)
-    {
-        return 2;
-    }
-    if (flick == 2)
-    {
-        return 3;
-    }
-    if (flick == 3)
-    {
-        return 1;
-    }
-}

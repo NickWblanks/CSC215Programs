@@ -1,19 +1,19 @@
 #include "netPBM.h"
 
-bool allocRed(int rows, int columns)
+pixel** allocRed( int rows, int columns)
 {
     int i = 0;
     int j = 0;
-    pixel** rptr;
+    pixel** rptr=nullptr;
     rptr = new(nothrow) pixel* [rows];
     if (rptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
-        return false;
+        return nullptr;
     }
     for (i = 0; i < rows; i++)
     {
-        rptr[i] = new (nothrow) pixel[columns];
+        rptr[i] = new (nothrow) pixel [columns];
         if (rptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -22,26 +22,27 @@ bool allocRed(int rows, int columns)
             }
             delete[] rptr;
             cout << "Memory Allocation Error" << endl;
-            return false;
+            rptr = nullptr;
+            return rptr;
         }
     }
-    return true;
+    return rptr;
 }
 
-bool allocGreen(int rows, int columns)
+pixel** allocGreen( int rows, int columns)
 {
     int i = 0;
     int j = 0;
-    pixel** gptr;
-    gptr = new(nothrow) pixel * [rows];
+    pixel** gptr=nullptr;
+    gptr = new(nothrow) pixel *[rows];
     if (gptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
-        return false;
+        return nullptr;
     }
     for (i = 0; i < rows; i++)
     {
-        gptr[i] = new (nothrow) pixel[columns];
+        gptr[i] = new (nothrow) pixel [columns];
         if (gptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -50,26 +51,27 @@ bool allocGreen(int rows, int columns)
             }
             delete[] gptr;
             cout << "Memory Allocation Error" << endl;
-            return false;
+            gptr = nullptr;
+            return gptr;
         }
     }
-    return true;
+    return gptr;
 }
 
-bool allocBlue(int rows, int columns)
+pixel** allocBlue( int rows, int columns)
 {
     int i = 0;
     int j = 0;
-    pixel** bptr;
-    bptr = new(nothrow) pixel * [rows];
+    pixel** bptr=nullptr;
+    bptr = new(nothrow) pixel *[rows];
     if (bptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
-        return false;
+        return nullptr;
     }
     for (i = 0; i < rows; i++)
     {
-        bptr[i] = new (nothrow) pixel[columns];
+        bptr[i] = new (nothrow) pixel [columns];
         if (bptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -78,9 +80,10 @@ bool allocBlue(int rows, int columns)
             }
             delete[] bptr;
             cout << "Memory Allocation Error" << endl;
-            return false;
+            bptr = nullptr;
+            return bptr;
         }
     }
-    return true;
+    return bptr;
 }
 
