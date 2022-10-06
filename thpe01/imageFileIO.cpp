@@ -11,7 +11,18 @@ bool openFile(ifstream& fin, char *fileName)
     return true;
 }
 
-bool openOut(ofstream& fout, char* fileName)
+bool openBOut(ofstream& fout, char* fileName)
+{
+    fout.open(fileName, ios::out | ios::ate | ios::binary);
+    if (!fout.is_open())
+    {
+        cout << "Unable to open file: " << fileName << endl;
+        return false;
+    }
+    return true;
+}
+
+bool openAOut(ofstream& fout, char* fileName)
 {
     fout.open(fileName);
     if (!fout.is_open())
@@ -22,70 +33,115 @@ bool openOut(ofstream& fout, char* fileName)
     return true;
 }
 
-bool readWriteAscii(ifstream& fin, ofstream& fout)
+
+void readWriteFile(ifstream& fin, ofstream &fout)
 {
     int i = 0;
     int j = 0;
-    int R, G, B = 0;
-    pixel r, g, b;
     int max;
     string com;
     image imgData;
     fin >> imgData.magicNumber;
-    if (imgData.magicNumber != "P3")
-    {
-        imgData.magicNumber = "P3";
-    }
     fin.ignore();
     while (fin.peek() == 35)
     {
         getline(fin, com);
         imgData.comment += com;
         imgData.comment += '\n';
-   
+
     }
-    fin >> imgData.rows;
     fin >> imgData.cols;
+    fin >> imgData.rows;
     fin >> max;
-    imgData.redgray = allocRed(imgData.rows, imgData.cols);
+    imgData.redgray = allocRed(imgData.cols, imgData.rows);
     if (imgData.redgray == nullptr)
     {
-        return false;
+        exit(1);
     }
-    imgData.green = allocGreen(imgData.rows, imgData.cols);
+    imgData.green = allocGreen(imgData.cols, imgData.rows);
     if (imgData.green == nullptr)
     {
-        return false;
+        exit(1);
     }
-    imgData.blue = allocBlue(imgData.rows, imgData.cols);
+    imgData.blue = allocBlue(imgData.cols, imgData.rows);
     if (imgData.blue == nullptr)
     {
-        return false;
+        exit(1);
     }
-    for (i = 0; i < imgData.rows; i++)
+    if (imgData.magicNumber == "P3")
     {
-        for (j = 0; j < imgData.cols; j++)
+        readAscii(fin, imgData);
+        writeAscii(fout, imgData);
+    }
+    if (imgData.magicNumber == "P6")
+    {
+        readBin(fin);
+    }
+}
+
+
+void readAscii(ifstream& fin, image data)
+{
+    int i = 0;
+    int j = 0;
+    int R, G, B = 0;
+    pixel r, g, b;
+    string com;
+    for (i = 0; i < data.cols; i++)
+    {
+        for (j = 0; j < data.rows; j++)
         {
             fin >> R >> G >> B;
             r = R;
             g = G;
             b = B;
-            imgData.redgray[i][j] = r;
-            imgData.green[i][j] = g;
-            imgData.blue[i][j] = b;
+            data.redgray[i][j] = r;
+            data.green[i][j] = g;
+            data.blue[i][j] = b;
+            //cout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
+
         }
     }
-    fout << imgData.magicNumber << endl;
-    fout << imgData.comment << endl;
-    fout << imgData.rows << endl;
-    fout << imgData.cols << endl;
-    fout << max << endl;
-    for (i = 0; i < imgData.rows; i++)
-    {
-        for (j = 0; j < imgData.cols; j++)
-        {
-            fout << (int)imgData.redgray[i][j] << " " << (int)imgData.green[i][j] << " " << (int)imgData.blue[i][j] << endl;
-        }
-    }
-    return true;
 }
+
+
+void readBin(ifstream& fin)
+{
+    image imgData;
+    int i = 0;
+    int j = 0;
+    int holder = 0;
+    while (fin.read((char*) &imgData, sizeof(int)))
+    {
+        
+    }
+    for (i = 0; i < imgData.cols; i++)
+    {
+        for (j = 0; j < imgData.rows; j++)
+        {
+            cout << imgData.redgray[i][j] << endl;
+            cout << imgData.green[i][j] << endl;
+            cout << imgData.blue[i][j] << endl;
+        }
+    }
+}
+
+void writeAscii(ofstream& fout, image data)
+{
+    int i, j;
+    int max = 255;
+    fout << data.magicNumber << endl;
+    fout << data.comment << endl;
+    fout << data.cols << endl;
+    fout << data.rows << endl;
+    fout << max << endl;
+    for (i = 0; i < data.cols; i++)
+    {
+        for (j = 0; j < data.rows; j++)
+        {
+            fout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
+        }
+    }
+}
+
+

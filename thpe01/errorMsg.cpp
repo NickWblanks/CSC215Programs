@@ -22,12 +22,6 @@ void invalidCount(bool check)
     }
 }
 
-void badOption(char* argOpt)
-{
-        cout << "Invalid Option" << endl;
-}
-
-
 bool cmdCheck(int cmdCount)
 {
     if (cmdCount < 4 || cmdCount > 6)

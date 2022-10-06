@@ -1,19 +1,19 @@
 #include "netPBM.h"
 
-pixel** allocRed( int rows, int columns)
+pixel** allocRed( int columns, int rows)
 {
     int i = 0;
     int j = 0;
     pixel** rptr=nullptr;
-    rptr = new(nothrow) pixel* [rows];
+    rptr = new(nothrow) pixel* [columns];
     if (rptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
         return nullptr;
     }
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < columns; i++)
     {
-        rptr[i] = new (nothrow) pixel [columns];
+        rptr[i] = new (nothrow) pixel [rows];
         if (rptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -29,20 +29,20 @@ pixel** allocRed( int rows, int columns)
     return rptr;
 }
 
-pixel** allocGreen( int rows, int columns)
+pixel** allocGreen( int columns, int rows)
 {
     int i = 0;
     int j = 0;
-    pixel** gptr=nullptr;
-    gptr = new(nothrow) pixel *[rows];
+    pixel** gptr = nullptr;
+    gptr = new(nothrow) pixel *[columns];
     if (gptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
         return nullptr;
     }
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < columns; i++)
     {
-        gptr[i] = new (nothrow) pixel [columns];
+        gptr[i] = new (nothrow) pixel [rows];
         if (gptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -58,20 +58,20 @@ pixel** allocGreen( int rows, int columns)
     return gptr;
 }
 
-pixel** allocBlue( int rows, int columns)
+pixel** allocBlue( int columns, int rows)
 {
     int i = 0;
     int j = 0;
     pixel** bptr=nullptr;
-    bptr = new(nothrow) pixel *[rows];
+    bptr = new(nothrow) pixel *[columns];
     if (bptr == nullptr)
     {
         cout << "Memory Allocation Error" << endl;
         return nullptr;
     }
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < columns; i++)
     {
-        bptr[i] = new (nothrow) pixel [columns];
+        bptr[i] = new (nothrow) pixel [rows];
         if (bptr[i] == nullptr)
         {
             for (j = 0; j < i; j++)
@@ -86,4 +86,26 @@ pixel** allocBlue( int rows, int columns)
     }
     return bptr;
 }
+
+bool allocArray()
+{
+    image imgData;
+    imgData.redgray = allocRed(imgData.cols, imgData.rows);
+    if (imgData.redgray == nullptr)
+    {
+        return false;
+    }
+    imgData.green = allocGreen(imgData.cols, imgData.rows);
+    if (imgData.green == nullptr)
+    {
+        return false;
+    }
+    imgData.blue = allocBlue(imgData.cols, imgData.rows);
+    if (imgData.blue == nullptr)
+    {
+        return false;
+    }
+    return true;
+}
+
 

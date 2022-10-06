@@ -7,36 +7,56 @@ int main(int argc, char** argv)
     ofstream fout;
     bool count;
     bool opt;
+    bool checkFile2;
+    char fileHolder[30];
     count = cmdCheck(argc);
     if (count == false)
     {
         invalidCount(count);
         return 0;
     }
-    if (argv[1] == "--ascii")
+    if (argc == 5 || argc == 6)
     {
         opt = optionCheck(argv[1], argv[2]);
+        if (opt == false)
         {
-            if (opt == false)
-            {
-                badOption(argv[1]);
-                return 0;
-            }
+            cout << "Invalid Option" << endl;
+            return 0;
         }
     }
-    bool checkFile = openFile(fin, argv[argc - 1]);
-    if (checkFile == false)
+    if (argc < 5)
     {
-        return 0;
+        char color[10] = ".ppm";
+        char grey[10] = ".pgm";
+        bool checkFile = openFile(fin, argv[argc - 1]);
+        if (checkFile == false)
+        {
+            return 0;
+        }
+        if (strcmp(argv[1], "--ascii") == 0)
+        {
+            strcpy(fileHolder, argv[argc - 2]);
+            strcat(fileHolder, color);
+            checkFile2 = openAOut(fout, fileHolder);
+            if (checkFile == false)
+            {
+                return 0;
+            }
+            readWriteFile(fin,fout);
+        }
+        if (argv[1] == "--binary")
+        {
+            strcpy(fileHolder, argv[argc - 2]);
+            strcat(fileHolder, color);
+            checkFile = openBOut(fout, fileHolder);
+            if (checkFile == false)
+            {
+                return 0;
+            }
+            readBin(fin);
+        }
     }
-    checkFile = openOut(fout, argv[argc - 2]);
-    bool asc = readWriteAscii(fin, fout);
-    if (asc == false)
-    {
-        return 0;
-    }
-
-
     return 0;
 }
+
 

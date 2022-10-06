@@ -1,10 +1,12 @@
 #pragma once
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <cctype>
+#include <cstring>
 
 using namespace std;
 
@@ -31,16 +33,23 @@ struct image
 
 bool openFile(ifstream& fin, char* fileName);
 
-bool openOut(ofstream& fout, char* fileName);
+bool openBOut(ofstream& fout, char* fileName);
 
-bool readWriteAscii(ifstream& fin, ofstream &fout);
+bool openAOut(ofstream& fout, char* fileName);
+
+void readWriteFile(ifstream& fin, ofstream& fout);
+
+void readAscii(ifstream& fin, image data);
+
+void writeAscii(ofstream& fout, image data);
+
+void readBin(ifstream& fin);
+
 
 
 //error message functions
 
 void invalidCount(bool check);
-
-void badOption(char* argOpt);
 
 bool cmdCheck(int cmdCount);
 
@@ -56,6 +65,8 @@ pixel** allocBlue( int rows, int columns);
 
 
 //other functions
+
+bool allocArray();
 
 
 
