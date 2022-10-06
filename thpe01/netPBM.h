@@ -37,13 +37,13 @@ bool openBOut(ofstream& fout, char* fileName);
 
 bool openAOut(ofstream& fout, char* fileName);
 
-void readWriteFile(ifstream& fin, ofstream& fout);
+void readWriteFile(ifstream& fin, ofstream& fout, image data);
 
 void readAscii(ifstream& fin, image data);
 
 void writeAscii(ofstream& fout, image data);
 
-void readBin(ifstream& fin);
+void readBin(ifstream& fin, image data);
 
 
 

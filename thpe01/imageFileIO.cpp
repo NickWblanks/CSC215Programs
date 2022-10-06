@@ -34,14 +34,14 @@ bool openAOut(ofstream& fout, char* fileName)
 }
 
 
-void readWriteFile(ifstream& fin, ofstream &fout)
+void readWriteFile(ifstream& fin, ofstream &fout, image data)
 {
     int i = 0;
     int j = 0;
     int max;
     string com;
     image imgData;
-    fin >> imgData.magicNumber;
+    imgData.magicNumber = data.magicNumber;
     fin.ignore();
     while (fin.peek() == 35)
     {
@@ -68,14 +68,14 @@ void readWriteFile(ifstream& fin, ofstream &fout)
     {
         exit(1);
     }
-    if (imgData.magicNumber == "P3")
+    if (data.magicNumber == "P3")
     {
         readAscii(fin, imgData);
         writeAscii(fout, imgData);
     }
-    if (imgData.magicNumber == "P6")
+    if (data.magicNumber == "P6")
     {
-        readBin(fin);
+        //readBin(fin, imgData);
     }
 }
 
@@ -105,23 +105,22 @@ void readAscii(ifstream& fin, image data)
 }
 
 
-void readBin(ifstream& fin)
+void readBin(ifstream& fin, image data)
 {
     image imgData;
     int i = 0;
     int j = 0;
     int holder = 0;
-    while (fin.read((char*) &imgData, sizeof(int)))
+    while (fin.read((char*) &data, sizeof(int)))
     {
         
     }
-    for (i = 0; i < imgData.cols; i++)
+    for (i = 0; i < data.cols; i++)
     {
-        for (j = 0; j < imgData.rows; j++)
+        for (j = 0; j < data.rows; j++)
         {
-            cout << imgData.redgray[i][j] << endl;
-            cout << imgData.green[i][j] << endl;
-            cout << imgData.blue[i][j] << endl;
+            cout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
+
         }
     }
 }
@@ -142,6 +141,25 @@ void writeAscii(ofstream& fout, image data)
             fout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
         }
     }
+}
+
+void writeBinary(ofstream& fout, image data)
+{
+    int i, j;
+    int max = 255;
+    fout << data.magicNumber << endl;
+    fout << data.comment << endl;
+    fout << data.cols << endl;
+    fout << data.rows << endl;
+    fout << max << endl;
+    for (i = 0; i < data.cols; i++)
+    {
+        for (j = 0; j < data.rows; j++)
+        {
+            fout << data.redgray[i][j] << " " << data.green[i][j] << " " << data.blue[i][j] << endl;
+        }
+    }
+
 }
 
 
