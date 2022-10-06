@@ -2,7 +2,7 @@
 
 bool openFile(ifstream& fin, char *fileName)
 {
-    fin.open(fileName);
+    fin.open(fileName, ios::binary);
     if (!fin.is_open())
     {
         cout << "Unable to open file: " << fileName << endl;
@@ -13,7 +13,7 @@ bool openFile(ifstream& fin, char *fileName)
 
 bool openBOut(ofstream& fout, char* fileName)
 {
-    fout.open(fileName, ios::out | ios::ate | ios::binary);
+    fout.open(fileName, ios::ate | ios::binary);
     if (!fout.is_open())
     {
         cout << "Unable to open file: " << fileName << endl;
@@ -33,54 +33,39 @@ bool openAOut(ofstream& fout, char* fileName)
     return true;
 }
 
-
-void readWriteFile(ifstream& fin, ofstream &fout, image data)
+void readData(ifstream& fin, image& data)
 {
-    int i = 0;
-    int j = 0;
     int max;
     string com;
-    image imgData;
-    imgData.magicNumber = data.magicNumber;
+    fin >> data.magicNumber;
     fin.ignore();
     while (fin.peek() == 35)
     {
         getline(fin, com);
-        imgData.comment += com;
-        imgData.comment += '\n';
+        data.comment += com;
+        data.comment += '\n';
 
     }
-    fin >> imgData.cols;
-    fin >> imgData.rows;
+    fin >> data.cols;
+    fin >> data.rows;
     fin >> max;
-    imgData.redgray = allocRed(imgData.cols, imgData.rows);
-    if (imgData.redgray == nullptr)
-    {
-        exit(1);
-    }
-    imgData.green = allocGreen(imgData.cols, imgData.rows);
-    if (imgData.green == nullptr)
-    {
-        exit(1);
-    }
-    imgData.blue = allocBlue(imgData.cols, imgData.rows);
-    if (imgData.blue == nullptr)
-    {
-        exit(1);
-    }
+}
+
+
+void readFile(ifstream& fin, image &data)
+{
     if (data.magicNumber == "P3")
     {
-        readAscii(fin, imgData);
-        writeAscii(fout, imgData);
+        readAscii(fin, data);
     }
     if (data.magicNumber == "P6")
     {
-        //readBin(fin, imgData);
+        readBin(fin, data);
     }
 }
 
 
-void readAscii(ifstream& fin, image data)
+void readAscii(ifstream& fin, image &data)
 {
     int i = 0;
     int j = 0;
@@ -105,27 +90,22 @@ void readAscii(ifstream& fin, image data)
 }
 
 
-void readBin(ifstream& fin, image data)
+void readBin(ifstream& fin, image &data)
 {
-    image imgData;
     int i = 0;
     int j = 0;
-    int holder = 0;
-    while (fin.read((char*) &data, sizeof(int)))
-    {
-        
-    }
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)
         {
-            cout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
-
+            fin.read((char*) &data.redgray[i][j], sizeof(pixel));
+            fin.read((char*)&data.green[i][j], sizeof(pixel));
+            fin.read((char*)&data.blue[i][j], sizeof(pixel));
         }
     }
 }
 
-void writeAscii(ofstream& fout, image data)
+void writeAscii(ofstream& fout, image &data)
 {
     int i, j;
     int max = 255;
@@ -143,20 +123,22 @@ void writeAscii(ofstream& fout, image data)
     }
 }
 
-void writeBinary(ofstream& fout, image data)
+void writeBinary(ofstream& fout, image &data)
 {
     int i, j;
     int max = 255;
-    fout << data.magicNumber << endl;
-    fout << data.comment << endl;
-    fout << data.cols << endl;
-    fout << data.rows << endl;
-    fout << max << endl;
+    
+    fout << data.magicNumber << '\n';
+    fout << data.comment << '\n';
+    fout << data.cols << " " << data.rows << '\n';
+    fout << max << '\n';
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)
         {
-            fout << data.redgray[i][j] << " " << data.green[i][j] << " " << data.blue[i][j] << endl;
+            fout.write((char*) &data.redgray[i][j], sizeof(pixel));
+            fout.write((char*)&data.green[i][j], sizeof(pixel));
+            fout.write((char*)&data.blue[i][j], sizeof(pixel));
         }
     }
 

@@ -37,14 +37,17 @@ bool openBOut(ofstream& fout, char* fileName);
 
 bool openAOut(ofstream& fout, char* fileName);
 
-void readWriteFile(ifstream& fin, ofstream& fout, image data);
+void readData(ifstream &fin, image &data);
 
-void readAscii(ifstream& fin, image data);
+void readFile(ifstream& fin, image &data);
 
-void writeAscii(ofstream& fout, image data);
+void readAscii(ifstream& fin, image &data);
 
-void readBin(ifstream& fin, image data);
+void writeAscii(ofstream& fout, image &data);
 
+void readBin(ifstream& fin, image &data);
+
+void writeBinary(ofstream& fout, image &data);
 
 
 //error message functions
@@ -66,7 +69,7 @@ pixel** allocBlue( int rows, int columns);
 
 //other functions
 
-bool allocArray();
+bool allocArray(image &data);
 
 
 

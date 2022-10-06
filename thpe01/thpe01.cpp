@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv)
 {
-    image oneData;
+    image imgData;
     ifstream fin;
     ofstream fout;
     bool count;
@@ -34,6 +34,15 @@ int main(int argc, char** argv)
         {
             return 0;
         }
+        readData(fin, imgData);
+        bool allocCheck = allocArray(imgData);
+        if (allocCheck == false)
+        {
+            return 0;
+        }
+        //read file
+        readFile(fin, imgData);
+        //check --bin/--ascii
         if (strcmp(argv[1], "--ascii") == 0)
         {
             strcpy(fileHolder, argv[argc - 2]);
@@ -43,28 +52,19 @@ int main(int argc, char** argv)
             {
                 return 0;
             }
-            fin >> oneData.magicNumber;
-            if (oneData.magicNumber != "P3")
-            {
-                oneData.magicNumber == "P3";
-            }
-            readWriteFile(fin,fout, oneData);
+            //write in specified format
+            writeAscii(fout, imgData);
         }
         if (strcmp(argv[1], "--binary") == 0)
         {
             strcpy(fileHolder, argv[argc - 2]);
             strcat(fileHolder, color);
-            checkFile = openBOut(fout, fileHolder);
-            if (checkFile == false)
+            checkFile2 = openBOut(fout, fileHolder);
+            if (checkFile2 == false)
             {
                 return 0;
             }
-            fin >> oneData.magicNumber;
-            if (oneData.magicNumber != "P6")
-            {
-                oneData.magicNumber == "P6";
-            }
-            readWriteFile(fin, fout, oneData);
+            writeBinary(fout, imgData);
         }
     }
     return 0;

@@ -87,21 +87,20 @@ pixel** allocBlue( int columns, int rows)
     return bptr;
 }
 
-bool allocArray()
+bool allocArray(image &data)
 {
-    image imgData;
-    imgData.redgray = allocRed(imgData.cols, imgData.rows);
-    if (imgData.redgray == nullptr)
+    data.redgray = allocRed(data.cols, data.rows);
+    if (data.redgray == nullptr)
     {
         return false;
     }
-    imgData.green = allocGreen(imgData.cols, imgData.rows);
-    if (imgData.green == nullptr)
+    data.green = allocGreen(data.cols, data.rows);
+    if (data.green == nullptr)
     {
         return false;
     }
-    imgData.blue = allocBlue(imgData.cols, imgData.rows);
-    if (imgData.blue == nullptr)
+    data.blue = allocBlue(data.cols, data.rows);
+    if (data.blue == nullptr)
     {
         return false;
     }
