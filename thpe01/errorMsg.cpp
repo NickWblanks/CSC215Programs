@@ -33,17 +33,9 @@ bool cmdCheck(int cmdCount)
 
 bool optionCheck(char* option, char* bNum)
 {
-    int num = atoi(bNum);
-    if (option == "--brighten")
+    if (strcmp(option, "--brighten") == 0 || strcmp(option, "--negate") == 0 || strcmp(option, "--sharpen") == 0 || strcmp(option, "--smooth") == 0 || strcmp(option, "--grayscale") == 0 || strcmp( option, "--contrast") == 0)
     {
-        if (num < -255 || num > 255)
-        {
-            return false;
-        }
+        return true;
     }
-    if (option != "--negate" || option != "--sharpen" || option != "--smooth" || option != "--grayscale" || option != "--contrast")
-    {
-        return false;
-    }
-    return true;
+    return false;
 }

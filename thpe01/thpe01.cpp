@@ -40,11 +40,11 @@ int main(int argc, char** argv)
         {
             return 0;
         }
-        //read file
         readFile(fin, imgData);
         //check --bin/--ascii
         if (strcmp(argv[1], "--ascii") == 0)
         {
+            imgData.magicNumber = "P3";
             strcpy(fileHolder, argv[argc - 2]);
             strcat(fileHolder, color);
             checkFile2 = openAOut(fout, fileHolder);
@@ -57,6 +57,7 @@ int main(int argc, char** argv)
         }
         if (strcmp(argv[1], "--binary") == 0)
         {
+            imgData.magicNumber = "P6";
             strcpy(fileHolder, argv[argc - 2]);
             strcat(fileHolder, color);
             checkFile2 = openBOut(fout, fileHolder);

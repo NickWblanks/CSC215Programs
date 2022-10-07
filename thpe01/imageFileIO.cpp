@@ -44,7 +44,6 @@ void readData(ifstream& fin, image& data)
         getline(fin, com);
         data.comment += com;
         data.comment += '\n';
-
     }
     fin >> data.cols;
     fin >> data.rows;
@@ -94,6 +93,7 @@ void readBin(ifstream& fin, image &data)
 {
     int i = 0;
     int j = 0;
+    fin.ignore();
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)
@@ -110,10 +110,10 @@ void writeAscii(ofstream& fout, image &data)
     int i, j;
     int max = 255;
     fout << data.magicNumber << endl;
-    fout << data.comment << endl;
+    fout << data.comment;
     fout << data.cols << endl;
     fout << data.rows << endl;
-    fout << max << endl;
+    fout << max << endl;;
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)
@@ -129,9 +129,9 @@ void writeBinary(ofstream& fout, image &data)
     int max = 255;
     
     fout << data.magicNumber << '\n';
-    fout << data.comment << '\n';
+    fout << data.comment;
     fout << data.cols << " " << data.rows << '\n';
-    fout << max << '\n';
+    fout << max;
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)
