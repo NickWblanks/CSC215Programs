@@ -107,4 +107,33 @@ bool allocArray(image &data)
     return true;
 }
 
+pixel** allocGray(int cols, int rows)
+{
+    int i = 0;
+    int j = 0;
+    pixel** grayptr = nullptr;
+    grayptr = new(nothrow) pixel * [cols];
+    if (grayptr == nullptr)
+    {
+        cout << "Memory Allocation Error" << endl;
+        return nullptr;
+    }
+    for (i = 0; i < cols; i++)
+    {
+        grayptr[i] = new (nothrow) pixel[rows];
+        if (grayptr[i] == nullptr)
+        {
+            for (j = 0; j < i; j++)
+            {
+                delete[] grayptr[j];
+            }
+            delete[] grayptr;
+            cout << "Memory Allocation Error" << endl;
+            grayptr = nullptr;
+            return grayptr;
+        }
+    }
+    return grayptr;
+}
+
 

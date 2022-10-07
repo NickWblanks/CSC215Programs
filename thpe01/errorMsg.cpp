@@ -31,11 +31,26 @@ bool cmdCheck(int cmdCount)
     return true;
 }
 
-bool optionCheck(char* option, char* bNum)
+bool optionValid(char* option)
 {
     if (strcmp(option, "--brighten") == 0 || strcmp(option, "--negate") == 0 || strcmp(option, "--sharpen") == 0 || strcmp(option, "--smooth") == 0 || strcmp(option, "--grayscale") == 0 || strcmp( option, "--contrast") == 0)
     {
         return true;
     }
     return false;
+}
+
+void optionCheck(char* option, image &data)
+{
+    char fileHolder[30];
+    char color[10] = ".ppm";
+    char grey[10] = ".pgm";
+    if (strcmp(option, "--negate") == 0)
+    {
+        negate(data);
+    }
+    if (strcmp(option, "--Grayscale") == 0)
+    {
+        Grayscale(data);
+    }
 }

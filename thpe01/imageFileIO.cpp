@@ -127,11 +127,10 @@ void writeBinary(ofstream& fout, image &data)
 {
     int i, j;
     int max = 255;
-    
     fout << data.magicNumber << '\n';
     fout << data.comment;
     fout << data.cols << " " << data.rows << '\n';
-    fout << max;
+    fout << max << '\n';
     for (i = 0; i < data.cols; i++)
     {
         for (j = 0; j < data.rows; j++)

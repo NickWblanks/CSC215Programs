@@ -56,7 +56,10 @@ void invalidCount(bool check);
 
 bool cmdCheck(int cmdCount);
 
-bool optionCheck(char* option, char* bNum);
+bool optionValid(char* option);
+
+void optionCheck(char* option, image& data);
+
 
 // mem allocation functions
 
@@ -66,10 +69,25 @@ pixel** allocGreen( int rows, int columns);
 
 pixel** allocBlue( int rows, int columns);
 
+pixel** allocGray(int cols, int rows);
+
+
 
 //other functions
 
 bool allocArray(image &data);
+
+bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, ofstream& fout);
+
+bool notBrighten(char* arg1, char* arg2, char* arg3, char* arg4, image& data, ifstream& fin, ofstream& fout);
+
+
+// operations functions
+
+void negate(image& data);
+
+void Grayscale(image& data);
+
 
 
 
