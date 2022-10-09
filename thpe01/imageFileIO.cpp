@@ -123,6 +123,7 @@ void writeAscii(ofstream& fout, image &data)
     }
 }
 
+
 void writeBinary(ofstream& fout, image &data)
 {
     int i, j;
