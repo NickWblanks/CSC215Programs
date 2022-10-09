@@ -16,7 +16,7 @@ void invalidCount(bool check)
         cout << "       --brighten #" << endl;
         cout << "       --sharpen" << endl;
         cout << "       --smooth" << endl;
-        cout << "       --greyscale" << endl;
+        cout << "       --grayscale" << endl;
         cout << "       --contrast" << endl;
 
     }
@@ -40,17 +40,3 @@ bool optionValid(char* option)
     return false;
 }
 
-void optionCheck(char* option, image &data)
-{
-    char fileHolder[30];
-    char color[10] = ".ppm";
-    char grey[10] = ".pgm";
-    if (strcmp(option, "--negate") == 0)
-    {
-        negate(data);
-    }
-    if (strcmp(option, "--Grayscale") == 0)
-    {
-        Grayscale(data);
-    }
-}

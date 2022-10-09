@@ -13,9 +13,9 @@ int main(int argc, char** argv)
         invalidCount(count);
         return 0;
     }
-    if (argc == 5)
+    if (argc == 5 || argc == 6)
     {
-        notBrighten(argv[1], argv[2], argv[3], argv[4], imgData, fin, fout);
+        withOpts(argv[1], argv[2], argv[3], argv[4], argv[5], imgData, fin, fout);
     }
     if (argc < 5)
     {
@@ -66,10 +66,12 @@ bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, o
         }
         writeBinary(fout, data);
     }
+    fin.close();
+    fout.close();
     return true;
 }
 
-bool notBrighten(char* arg1, char* arg2, char* arg3, char *arg4, image& data, ifstream& fin, ofstream& fout)
+bool withOpts(char* arg1, char* arg2, char* arg3, char *arg4, char * arg5, image& data, ifstream& fin, ofstream& fout)
 {
     bool opt;
     char fileHolder[30];
@@ -83,6 +85,10 @@ bool notBrighten(char* arg1, char* arg2, char* arg3, char *arg4, image& data, if
         cout << "Invalid Option" << endl;
         return false;
     }
+    if (strcmp(arg1, "--brighten") == 0)
+    {
+        checkFile = openFile(fin, arg5);
+    }
     checkFile = openFile(fin, arg4);
     if (checkFile == false)
     {
@@ -95,32 +101,43 @@ bool notBrighten(char* arg1, char* arg2, char* arg3, char *arg4, image& data, if
         return false;
     }
     readFile(fin, data); // read in the file
-    optionCheck(arg1, data);
     if (strcmp(arg2, "--ascii") == 0)
     {
-        strcpy(fileHolder, arg3);
-        strcat(fileHolder, grey);
-        data.magicNumber = "P2";
-        checkFile2 = openAOut(fout, fileHolder);
-        if (checkFile == false)
+        if (strcmp(arg1, "--grayscale") == 0)
         {
-            return false;
+            strcpy(fileHolder, arg3);
+            strcat(fileHolder, grey);
+            data.magicNumber = "P2";
+            checkFile2 = openAOut(fout, fileHolder);
+            if (checkFile == false)
+            {
+                return false;
+            }
+            writeGray(fout, data);
         }
-        writeAscii(fout, data);
+        if (strcmp(arg1, "--brighten") == 0)
+        {
+            Brighten(arg2, data);
+            writeAscii(fout, data);
+        }
     }
     if (strcmp(arg2, "--binary") == 0)
     {
         strcpy(fileHolder, arg3);
         strcat(fileHolder, grey);
+        data.magicNumber = "P6";
         checkFile2 = openBOut(fout, fileHolder);
         if (checkFile2 == false)
         {
             return false;
         }
-        writeBinary(fout, data);
+        writeGrayB(fout, data);
     }
+    fin.close();
+    fout.close();
     return true;
 }
+
 
 
 

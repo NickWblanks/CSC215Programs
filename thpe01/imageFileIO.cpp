@@ -140,7 +140,43 @@ void writeBinary(ofstream& fout, image &data)
             fout.write((char*)&data.blue[i][j], sizeof(pixel));
         }
     }
-
 }
+
+void writeGray(ofstream& fout, image& data)
+{
+    int i, j;
+    int max = 255;
+    fout << data.magicNumber << endl;
+    fout << data.comment;
+    fout << data.cols << " " << data.rows << endl;
+    fout << max << endl;;
+    for (i = 0; i < data.cols; i++)
+    {
+        for (j = 0; j < data.rows; j++)
+        {
+            fout << (int)data.redgray[i][j] << endl;
+        }
+    }
+}
+
+void writeGrayB(ofstream& fout, image& data)
+{
+    int i, j;
+    int max = 255;
+    fout << data.magicNumber << '\n';
+    fout << data.comment;
+    fout << data.cols << " " << data.rows << '\n';
+    fout << max << '\n';
+    for (i = 0; i < data.cols; i++)
+    {
+        for (j = 0; j < data.rows; j++)
+        {
+            fout.write((char*)&data.redgray[i][j], sizeof(pixel));
+        }
+    }
+}
+
+
+
 
 
