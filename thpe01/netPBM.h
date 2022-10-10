@@ -58,6 +58,16 @@ bool cmdCheck(int cmdCount);
 
 bool optionValid(char* option);
 
+bool magicCheck(image& data);
+
+int optionCheck(char* option);
+
+bool outputType(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut);
+
+bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut);
+
+
+
 
 // mem allocation functions
 
@@ -77,14 +87,12 @@ bool allocArray(image &data);
 
 bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, ofstream& fout);
 
-bool withOpts(char* arg1, char* arg2, char* arg3, char* arg4, char* arg5, image& data, ifstream& fin, ofstream& fout);
-
 
 // operations functions
 
 void negate(image& data);
 
-pixel** Grayscale(image& data);
+void Grayscale(image& data);
 
 void writeGray(ofstream& fout, image& data);
 

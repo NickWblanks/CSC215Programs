@@ -40,3 +40,42 @@ bool optionValid(char* option)
     return false;
 }
 
+bool magicCheck(image& data)
+{
+    if (data.magicNumber != "P3" && data.magicNumber != "P2" && data.magicNumber != "P5" && data.magicNumber != "P6")
+    {
+        return false;
+    }
+    return true;
+}
+
+
+int optionCheck(char* option)
+{
+    if (strcmp(option, "--negate") == 0)
+    {
+        return 1;
+    }
+    if (strcmp(option, "--brighten") == 0)
+    {
+        return 2;
+    }
+    if (strcmp(option, "--sharpen") == 0)
+    {
+        return 3;
+    }
+    if (strcmp(option, "--smooth") == 0)
+    {
+        return 4;
+    }
+    if (strcmp(option, "--grayscale") == 0)
+    {
+        return 5;
+    }
+    if (strcmp(option, "--contrast") == 0)
+    {
+        return 6;
+    }
+    return 0;
+}
+

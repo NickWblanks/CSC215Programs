@@ -111,8 +111,7 @@ void writeAscii(ofstream& fout, image &data)
     int max = 255;
     fout << data.magicNumber << endl;
     fout << data.comment;
-    fout << data.cols << endl;
-    fout << data.rows << endl;
+    fout << data.cols << " " << data.rows << endl;
     fout << max << endl;;
     for (i = 0; i < data.cols; i++)
     {
@@ -176,6 +175,74 @@ void writeGrayB(ofstream& fout, image& data)
         }
     }
 }
+
+bool outputType(char* type, ifstream &fin, ofstream &fout, image &data, char *fileOut)
+{
+    char fileHolder[30];
+    char color[10] = ".ppm";  
+    if (strcmp(type, "--ascii") == 0)
+    {
+        data.magicNumber = "P3";
+        strcpy(fileHolder, fileOut);
+        strcat(fileHolder, color);
+        bool checkFile2 = openAOut(fout, fileHolder);
+        if (checkFile2 == false)
+        {
+            return false;
+        }
+        writeAscii(fout, data);
+        return true;
+
+    }
+    if (strcmp(type, "--binary") == 0)
+    {
+        data.magicNumber = "P6";
+        strcpy(fileHolder, fileOut);
+        strcat(fileHolder, color);
+        bool checkFile = openBOut(fout, fileHolder);
+        if (checkFile == false)
+        {
+            return false;
+        }
+        writeBinary(fout, data);
+        return true;
+    }
+    return true;
+}
+
+bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut)
+{
+    char fileHolder[30];
+    char color[10] = ".pgm";
+    if (strcmp(type, "--ascii") == 0)
+    {
+        data.magicNumber = "P2";
+        strcpy(fileHolder, fileOut);
+        strcat(fileHolder, color);
+        bool checkFile2 = openAOut(fout, fileHolder);
+        if (checkFile2 == false)
+        {
+            return false;
+        }
+        writeGray(fout, data);
+        return true;
+    }
+    if (strcmp(type, "--binary") == 0)
+    {
+        data.magicNumber = "P5";
+        strcpy(fileHolder, fileOut);
+        strcat(fileHolder, color);
+        bool checkFile = openBOut(fout, fileHolder);
+        if (checkFile == false)
+        {
+            return false;
+        }
+        writeGrayB(fout, data);
+        return true;
+    }
+    return true;
+}
+
 
 
 
