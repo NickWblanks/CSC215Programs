@@ -137,3 +137,19 @@ pixel** allocGray(int cols, int rows)
 }
 
 
+void free2D(pixel** arr, int cols)
+{
+    int i;
+    if (arr == nullptr)
+    {
+        return;
+    }
+    for (i = 0; i < cols; i++)
+    {
+        delete[] arr[i];
+    }
+    delete[] arr;
+    arr = nullptr;
+}
+
+

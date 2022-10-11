@@ -40,27 +40,27 @@ void Brighten( char* arg2, image& data)
             data.redgray[i][j] = data.redgray[i][j] + val;
             data.green[i][j] = data.green[i][j] + val;
             data.blue[i][j] = data.blue[i][j] + val;
-            if ((unsigned long int)data.redgray[i][j] > 255 )
+            if (data.redgray[i][j] > 255 )
             {
                 data.redgray[i][j] = 255;
             }
-            if ((unsigned long int)data.redgray[i][j] < 0)
+            if (data.redgray[i][j] < 0)
             {
                 data.redgray[i][j] = 0;
             }
-            if ((unsigned long int)data.green[i][j] > 255)
+            if (data.green[i][j] > 255)
             {
                 data.green[i][j] = 255;
             }
-            if ((unsigned long int)data.green[i][j] < 0)
+            if (data.green[i][j] < 0)
             {
                 data.green[i][j] = 0;
             }
-            if ((unsigned long int)data.blue[i][j] > 255)
+            if (data.blue[i][j] > 255)
             {
                 data.blue[i][j] = 255;
             }
-            if ((unsigned long int)data.blue[i][j] < 0)
+            if (data.blue[i][j] < 0)
             {
                 data.blue[i][j] = 0;
             }     

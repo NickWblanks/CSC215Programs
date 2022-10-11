@@ -88,6 +88,9 @@ int main(int argc, char** argv)
             return 0;
         }
     }
+    free2D(imgData.redgray, imgData.cols);
+    free2D(imgData.green, imgData.cols);
+    free2D(imgData.blue, imgData.cols);
     return 0;
 }
 

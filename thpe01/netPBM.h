@@ -79,6 +79,9 @@ pixel** allocBlue( int rows, int columns);
 
 pixel** allocGray(int cols, int rows);
 
+void free2D(pixel** arr, int cols);
+
+
 
 
 //other functions
