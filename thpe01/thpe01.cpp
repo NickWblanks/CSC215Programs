@@ -37,6 +37,12 @@ int main(int argc, char** argv)
             Brighten(argv[2], imgData);
             output = outputType(argv[3], fin, fout, imgData, argv[4]);
         }
+        if (option == 4)
+        {
+            pixel** newRed = allocNewRed(imgData.cols, imgData.rows);
+            pixel** newGreen = allocNewGreen(imgData.cols, imgData.rows);
+            pixel** newBlue = allocNewBlue(imgData.cols, imgData.rows);
+        }
     }
     if (argc == 5)
     {

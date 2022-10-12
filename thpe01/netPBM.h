@@ -81,6 +81,14 @@ pixel** allocGray(int cols, int rows);
 
 void free2D(pixel** arr, int cols);
 
+pixel** allocNewRed(int columns, int rows);
+
+pixel** allocNewGreen(int columns, int rows);
+
+pixel** allocNewBlue(int columns, int rows);
+
+
+
 
 
 
@@ -102,6 +110,9 @@ void writeGray(ofstream& fout, image& data);
 void writeGrayB(ofstream& fout, image& data);
 
 void Brighten(char* arg2, image& data);
+
+void sharpen(image& data, pixel** newRed, pixel** newGreen, pixel** newBlue);
+
 
 
 

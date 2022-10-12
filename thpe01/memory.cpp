@@ -152,4 +152,91 @@ void free2D(pixel** arr, int cols)
     arr = nullptr;
 }
 
+pixel** allocNewRed(int columns, int rows)
+{
+    int i = 0;
+    int j = 0;
+    pixel** nrptr = nullptr;
+    nrptr = new(nothrow) pixel * [columns];
+    if (nrptr == nullptr)
+    {
+        cout << "Memory Allocation Error" << endl;
+        return nullptr;
+    }
+    for (i = 0; i < columns; i++)
+    {
+        nrptr[i] = new (nothrow) pixel[rows];
+        if (nrptr[i] == nullptr)
+        {
+            for (j = 0; j < i; j++)
+            {
+                delete[] nrptr[j];
+            }
+            delete[] nrptr;
+            cout << "Memory Allocation Error" << endl;
+            nrptr = nullptr;
+            return nrptr;
+        }
+    }
+    return nrptr;
+}
+
+pixel** allocNewGreen(int columns, int rows)
+{
+    int i = 0;
+    int j = 0;
+    pixel** ngptr = nullptr;
+    ngptr = new(nothrow) pixel * [columns];
+    if (ngptr == nullptr)
+    {
+        cout << "Memory Allocation Error" << endl;
+        return nullptr;
+    }
+    for (i = 0; i < columns; i++)
+    {
+        ngptr[i] = new (nothrow) pixel[rows];
+        if (ngptr[i] == nullptr)
+        {
+            for (j = 0; j < i; j++)
+            {
+                delete[] ngptr[j];
+            }
+            delete[] ngptr;
+            cout << "Memory Allocation Error" << endl;
+            ngptr = nullptr;
+            return ngptr;
+        }
+    }
+    return ngptr;
+}
+
+pixel** allocNewBlue(int columns, int rows)
+{
+    int i = 0;
+    int j = 0;
+    pixel** nbptr = nullptr;
+    nbptr = new(nothrow) pixel * [columns];
+    if (nbptr == nullptr)
+    {
+        cout << "Memory Allocation Error" << endl;
+        return nullptr;
+    }
+    for (i = 0; i < columns; i++)
+    {
+        nbptr[i] = new (nothrow) pixel[rows];
+        if (nbptr[i] == nullptr)
+        {
+            for (j = 0; j < i; j++)
+            {
+                delete[] nbptr[j];
+            }
+            delete[] nbptr;
+            cout << "Memory Allocation Error" << endl;
+            nbptr = nullptr;
+            return nbptr;
+        }
+    }
+    return nbptr;
+}
+
 

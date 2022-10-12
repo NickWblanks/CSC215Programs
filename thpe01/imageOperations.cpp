@@ -80,3 +80,18 @@ void Brighten( char* arg2, image& data)
         }
     }
 }
+
+
+void sharpen(image& data, pixel** newRed, pixel** newGreen, pixel** newBlue)
+{
+    int i, j;
+    for (j = 0; j < data.rows; j++)
+    {
+        newRed[0][j] = 0;
+        newGreen[0][j] = 0;
+        newBlue[0][j] = 0;
+        newRed[data.cols][j] = 0;
+        newGreen[data.cols][j] = 0;
+        newBlue[data.cols][j] = 0;
+    }
+}
