@@ -49,14 +49,14 @@ void readBin(ifstream& fin, image &data);
 
 void writeBinary(ofstream& fout, image &data);
 
+bool readManip(image& data, ifstream& fin, char* file);
+
 
 //error message functions
 
-void invalidCount(bool check);
+void usageState();
 
 bool cmdCheck(int cmdCount);
-
-bool optionValid(char* option);
 
 bool magicCheck(image& data);
 
@@ -81,11 +81,11 @@ pixel** allocGray(int cols, int rows);
 
 void free2D(pixel** arr, int cols);
 
-pixel** allocNewRed(int columns, int rows);
+//pixel** allocNewRed(int columns, int rows);
 
-pixel** allocNewGreen(int columns, int rows);
+//pixel** allocNewGreen(int columns, int rows);
 
-pixel** allocNewBlue(int columns, int rows);
+//pixel** allocNewBlue(int columns, int rows);
 
 
 
@@ -97,6 +97,8 @@ pixel** allocNewBlue(int columns, int rows);
 bool allocArray(image &data);
 
 bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, ofstream& fout);
+
+bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofstream& fout, image& data);
 
 
 // operations functions
@@ -111,7 +113,8 @@ void writeGrayB(ofstream& fout, image& data);
 
 void Brighten(char* arg2, image& data);
 
-void sharpen(image& data, pixel** newRed, pixel** newGreen, pixel** newBlue);
+void contrast(image& data);
+
 
 
 

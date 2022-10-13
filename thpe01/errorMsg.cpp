@@ -1,25 +1,20 @@
 #include "netPBM.h"
 
-void invalidCount(bool check)
+void usageState()
 {
-    if (check == false)
-    {
-        cout << "Invalid Startup" << endl;
-        cout << "thpe01.exe [option] --outputtype basename image.ppm" << endl;
-        cout << endl;
-        cout << "Output Type" << endl;
-        cout << "       --ascii pixel values will be written in text form" << endl;
-        cout << "       --binary pixel values will be written in binary form" << endl;
-        cout << endl;
-        cout << "Option Code" << endl;
-        cout << "       --negate" << endl;
-        cout << "       --brighten #" << endl;
-        cout << "       --sharpen" << endl;
-        cout << "       --smooth" << endl;
-        cout << "       --grayscale" << endl;
-        cout << "       --contrast" << endl;
-
-    }
+    cout << "thpe01.exe [option] --outputtype basename image.ppm" << endl;
+    cout << endl;
+    cout << "Output Type" << endl;
+    cout << "       --ascii pixel values will be written in text form" << endl;
+    cout << "       --binary pixel values will be written in binary form" << endl;
+    cout << endl;
+    cout << "Option Code" << endl;
+    cout << "       --negate" << endl;
+    cout << "       --brighten #" << endl;
+    cout << "       --sharpen" << endl;
+    cout << "       --smooth" << endl;
+    cout << "       --grayscale" << endl;
+    cout << "       --contrast" << endl;
 }
 
 bool cmdCheck(int cmdCount)
@@ -31,14 +26,6 @@ bool cmdCheck(int cmdCount)
     return true;
 }
 
-bool optionValid(char* option)
-{
-    if (strcmp(option, "--brighten") == 0 || strcmp(option, "--negate") == 0 || strcmp(option, "--sharpen") == 0 || strcmp(option, "--smooth") == 0 || strcmp(option, "--grayscale") == 0 || strcmp( option, "--contrast") == 0)
-    {
-        return true;
-    }
-    return false;
-}
 
 bool magicCheck(image& data)
 {
@@ -76,6 +63,8 @@ int optionCheck(char* option)
     {
         return 6;
     }
+    cout << "Invalid Option" << endl;
+    usageState();
     return 0;
 }
 

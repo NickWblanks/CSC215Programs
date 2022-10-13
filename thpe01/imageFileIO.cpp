@@ -207,7 +207,9 @@ bool outputType(char* type, ifstream &fin, ofstream &fout, image &data, char *fi
         writeBinary(fout, data);
         return true;
     }
-    return true;
+    return false;
+    cout << "Invalid Startup" << endl;
+    usageState();
 }
 
 bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut)
@@ -240,7 +242,9 @@ bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileO
         writeGrayB(fout, data);
         return true;
     }
-    return true;
+    return false;
+    cout << "Invalid Startup" << endl;
+    usageState();
 }
 
 
