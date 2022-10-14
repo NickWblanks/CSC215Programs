@@ -1,4 +1,27 @@
+/** **********************************************************************
+ * @file
+ ************************************************************************/
+
+
 #include "netPBM.h"
+
+ /** **********************************************************************
+  *  @author Nicholas K Wilk
+  *
+  *  @par Description
+  *
+  *  This function does not take any arguments. When it is called
+  *  it will output a message to the screen. It has no return value.
+  *
+  *
+  *  @par Example
+  *  @verbatim
+
+     usageState();
+
+     @endverbatim
+  ************************************************************************/
+
 
 void usageState()
 {
@@ -17,6 +40,29 @@ void usageState()
     cout << "       --contrast" << endl;
 }
 
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes a single argument which is an integer.
+ *  It will return true or false based on whether the integer is in the
+ *  range of 4 - 6 inclusive.
+ * 
+ *  @returns True if the number is between 4 and 6, false if not.
+ *
+ *  @par Example
+ *  @verbatim
+
+    int num = 5;
+    bool check;
+    check  = cmdCheck(num);
+    return check;
+
+    @endverbatim
+ ************************************************************************/
+
+
 bool cmdCheck(int cmdCount)
 {
     if (cmdCount < 4 || cmdCount > 6)
@@ -27,6 +73,30 @@ bool cmdCheck(int cmdCount)
 }
 
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes a single argument which is the structure
+ *  containing the image data. It will check to see if the 
+ *  Magic Number is one of P3, P6, P2, or P5.
+ * 
+ *
+ *  @returns True if the Magic Number is one of those values, false if not.
+ *
+ *  @par Example
+ *  @verbatim
+
+    bool check;
+    check  = magicCheck(imgData);
+    return check;
+
+    @endverbatim
+ ************************************************************************/
+
+
 bool magicCheck(image& data)
 {
     if (data.magicNumber != "P3" && data.magicNumber != "P2" && data.magicNumber != "P5" && data.magicNumber != "P6")
@@ -35,6 +105,29 @@ bool magicCheck(image& data)
     }
     return true;
 }
+
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes a single argument which is the option 
+ *  specified by the user.
+ *
+ *
+ *  @returns An integer value representing the chosen option. 
+ *  Will return 0 if its an invalid option.
+ *
+ *  @par Example
+ *  @verbatim
+
+    int check;
+    check  = optionCheck(--brighten);
+    return check;
+
+    @endverbatim
+ ************************************************************************/
 
 
 int optionCheck(char* option)
@@ -66,5 +159,56 @@ int optionCheck(char* option)
     cout << "Invalid Option" << endl;
     usageState();
     return 0;
+}
+
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes a single argument which is the output type
+ *  specified by the user.
+ *
+ *
+ *  @returns A boolean value, true or false. True if the
+ *  option is valid, false otherwise.
+ *
+ *  @par Example
+ *  @verbatim
+
+    bool check;
+    check  = invalidType(--ascii);
+    return check;
+
+    @endverbatim
+ ************************************************************************/
+
+bool invalidType(char* type)
+{
+    if (strcmp("--ascii", type) == 0)
+    {
+        return true;
+    }
+    if (strcmp("--binary", type) == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
+int valCheck(int val)
+{
+    if (val > 255)
+    {
+        val = 255;
+        return val;
+    }
+    if (val < 0)
+    {
+        val = 0;
+        return val;
+    }
+    return val;
 }
 

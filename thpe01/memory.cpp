@@ -1,4 +1,32 @@
+/** **********************************************************************
+ * @file
+ ************************************************************************/
+
 #include "netPBM.h"
+
+
+ /** **********************************************************************
+  *  @author Nicholas K Wilk
+  *
+  *  @par Description
+  *
+  *  This function will take in 2 arguments, both in the form of integers.
+  *  The first argument is the rows, the second is the columns.
+  *  These are used to dynamically allocate a 2d array to hold all
+  *  the red values of the image.
+  *
+  *
+  *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
+  *
+  *  @par Example
+  *  @verbatim
+
+     pixel** rptr = allocRed(columns, rows);
+     return rptr;
+
+     @endverbatim
+  ************************************************************************/
+
 
 pixel** allocRed( int columns, int rows)
 {
@@ -29,6 +57,30 @@ pixel** allocRed( int columns, int rows)
     return rptr;
 }
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function will take in 2 arguments, both in the form of integers.
+ *  The first argument is the rows, the second is the columns.
+ *  These are used to dynamically allocate a 2d array to hold all
+ *  the green values of the image.
+ *
+ *
+ *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
+ *
+ *  @par Example
+ *  @verbatim
+
+    pixel** gptr = allocGreen(columns, rows);
+    return gptr;
+
+    @endverbatim
+ ************************************************************************/
+
+
 pixel** allocGreen( int columns, int rows)
 {
     int i = 0;
@@ -57,6 +109,29 @@ pixel** allocGreen( int columns, int rows)
     }
     return gptr;
 }
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function will take in 2 arguments, both in the form of integers.
+ *  The first argument is the rows, the second is the columns.
+ *  These are used to dynamically allocate a 2d array to hold all
+ *  the blue values of the image.
+ *
+ *
+ *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
+ *
+ *  @par Example
+ *  @verbatim
+
+    pixel** bptr = allocBlue(columns, rows);
+    return bptr;
+
+    @endverbatim
+ ************************************************************************/
+
 
 pixel** allocBlue( int columns, int rows)
 {
@@ -87,19 +162,41 @@ pixel** allocBlue( int columns, int rows)
     return bptr;
 }
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function will take in 1 argument, which is the structure containting
+ *  the data of the image. This function will then call the three dynamic allocation
+ *  functions to dynamically allocate all 3 arrays.
+ *
+ *
+ *  @returns True if all three arrays are successfully allocated, false if any fail..
+ *
+ *  @par Example
+ *  @verbatim
+
+    bool allocCheck = allocArray(imgData);
+    return allocCheck;
+
+    @endverbatim
+ ************************************************************************/
+
 bool allocArray(image &data)
 {
-    data.redgray = allocRed(data.cols, data.rows);
+    data.redgray = allocRed(data.rows, data.cols);
     if (data.redgray == nullptr)
     {
         return false;
     }
-    data.green = allocGreen(data.cols, data.rows);
+    data.green = allocGreen(data.rows, data.cols);
     if (data.green == nullptr)
     {
         return false;
     }
-    data.blue = allocBlue(data.cols, data.rows);
+    data.blue = allocBlue(data.rows, data.cols);
     if (data.blue == nullptr)
     {
         return false;
@@ -107,34 +204,25 @@ bool allocArray(image &data)
     return true;
 }
 
-pixel** allocGray(int cols, int rows)
-{
-    int i = 0;
-    int j = 0;
-    pixel** grayptr = nullptr;
-    grayptr = new(nothrow) pixel * [cols];
-    if (grayptr == nullptr)
-    {
-        cout << "Memory Allocation Error" << endl;
-        return nullptr;
-    }
-    for (i = 0; i < cols; i++)
-    {
-        grayptr[i] = new (nothrow) pixel[rows];
-        if (grayptr[i] == nullptr)
-        {
-            for (j = 0; j < i; j++)
-            {
-                delete[] grayptr[j];
-            }
-            delete[] grayptr;
-            cout << "Memory Allocation Error" << endl;
-            grayptr = nullptr;
-            return grayptr;
-        }
-    }
-    return grayptr;
-}
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function will take in 2 arguments, the first is the array to be deleted.
+ *  The second is the columns of the array. 
+ *  This function has no return, it will delete the contents of a 2d array
+ *  and then it will delete the array itself, and set it to nullptr.
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    free2d(redarr, imgData.cols);
+
+    @endverbatim
+ ************************************************************************/
 
 
 void free2D(pixel** arr, int cols)
@@ -142,7 +230,7 @@ void free2D(pixel** arr, int cols)
     int i;
     if (arr == nullptr)
     {
-        return;
+        exit(0);
     }
     for (i = 0; i < cols; i++)
     {
@@ -152,91 +240,14 @@ void free2D(pixel** arr, int cols)
     arr = nullptr;
 }
 
-pixel** allocNewRed(int columns, int rows)
-{
-    int i = 0;
-    int j = 0;
-    pixel** nrptr = nullptr;
-    nrptr = new(nothrow) pixel * [columns];
-    if (nrptr == nullptr)
-    {
-        cout << "Memory Allocation Error" << endl;
-        return nullptr;
-    }
-    for (i = 0; i < columns; i++)
-    {
-        nrptr[i] = new (nothrow) pixel[rows];
-        if (nrptr[i] == nullptr)
-        {
-            for (j = 0; j < i; j++)
-            {
-                delete[] nrptr[j];
-            }
-            delete[] nrptr;
-            cout << "Memory Allocation Error" << endl;
-            nrptr = nullptr;
-            return nrptr;
-        }
-    }
-    return nrptr;
-}
 
-pixel** allocNewGreen(int columns, int rows)
+bool allocNArray(pixel ** &arr, image &data)
 {
-    int i = 0;
-    int j = 0;
-    pixel** ngptr = nullptr;
-    ngptr = new(nothrow) pixel * [columns];
-    if (ngptr == nullptr)
+    arr = allocRed(data.rows, data.cols);
+    if (arr == nullptr)
     {
-        cout << "Memory Allocation Error" << endl;
-        return nullptr;
+        return false;
     }
-    for (i = 0; i < columns; i++)
-    {
-        ngptr[i] = new (nothrow) pixel[rows];
-        if (ngptr[i] == nullptr)
-        {
-            for (j = 0; j < i; j++)
-            {
-                delete[] ngptr[j];
-            }
-            delete[] ngptr;
-            cout << "Memory Allocation Error" << endl;
-            ngptr = nullptr;
-            return ngptr;
-        }
-    }
-    return ngptr;
+    return true;
 }
-
-pixel** allocNewBlue(int columns, int rows)
-{
-    int i = 0;
-    int j = 0;
-    pixel** nbptr = nullptr;
-    nbptr = new(nothrow) pixel * [columns];
-    if (nbptr == nullptr)
-    {
-        cout << "Memory Allocation Error" << endl;
-        return nullptr;
-    }
-    for (i = 0; i < columns; i++)
-    {
-        nbptr[i] = new (nothrow) pixel[rows];
-        if (nbptr[i] == nullptr)
-        {
-            for (j = 0; j < i; j++)
-            {
-                delete[] nbptr[j];
-            }
-            delete[] nbptr;
-            cout << "Memory Allocation Error" << endl;
-            nbptr = nullptr;
-            return nbptr;
-        }
-    }
-    return nbptr;
-}
-
 
