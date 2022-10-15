@@ -150,6 +150,28 @@ void readData(ifstream& fin, image& data)
 }
 
 
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the input file
+ *  stream containing the file with data to read. The second is the structure to
+ *  be filled with data. This function uses the magic number within
+ *  the image data to determine if the rest of the file should be read
+ *  in as ascii or binary.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    readFile(fin, image structure);
+
+    @endverbatim
+ ************************************************************************/
+
+
 void readFile(ifstream& fin, image &data)
 {
     if (data.magicNumber == "P3")
@@ -162,6 +184,25 @@ void readFile(ifstream& fin, image &data)
     }
 }
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the input file
+ *  stream containing the file with data to read. The second is the structure to
+ *  be filled with data. This function will read a file in as Ascii.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    readAscii(fin, image structure);
+
+    @endverbatim
+ ************************************************************************/
 
 void readAscii(ifstream& fin, image &data)
 {
@@ -182,6 +223,26 @@ void readAscii(ifstream& fin, image &data)
 }
 
 
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the input file
+ *  stream containing the file with data to read. The second is the structure to
+ *  be filled with data. This function will read a file in as Binary.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    readBin(fin, image structure);
+
+    @endverbatim
+ ************************************************************************/
+
+
 void readBin(ifstream& fin, image &data)
 {
     int i = 0;
@@ -197,6 +258,26 @@ void readBin(ifstream& fin, image &data)
         }
     }
 }
+
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the output file
+ *  stream containing the file to write to. The second is the structure
+ *  filled with data. This function will write to a file in Ascii.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    writeAscii(fout, image structure);
+
+    @endverbatim
+ ************************************************************************/
 
 void writeAscii(ofstream& fout, image &data)
 {
@@ -215,6 +296,25 @@ void writeAscii(ofstream& fout, image &data)
     }
 }
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the output file
+ *  stream containing the file to write to. The second is the structure
+ *  filled with data. This function will write to a file in Binary.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    writeBinary(fout, image structure);
+
+    @endverbatim
+ ************************************************************************/
 
 void writeBinary(ofstream& fout, image &data)
 {
@@ -235,6 +335,27 @@ void writeBinary(ofstream& fout, image &data)
     }
 }
 
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the output file
+ *  stream containing the file to write to. The second is the structure
+ *  filled with data. This function will write to a file in Ascii.
+ *  This function only outputs the redgray array, and thus is used for grayscale.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    writeGray(fout, image structure);
+
+    @endverbatim
+ ************************************************************************/
+
 void writeGray(ofstream& fout, image& data)
 {
     int i, j;
@@ -251,6 +372,27 @@ void writeGray(ofstream& fout, image& data)
         }
     }
 }
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 2 arguments. The first is the output file
+ *  stream containing the file to write to. The second is the structure
+ *  filled with data. This function will write to a file in Binary.
+ *  This function only outputs the redgray array, and thus is used for grayscale.
+ *
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    writeGrayB(fout, image structure);
+
+    @endverbatim
+ ************************************************************************/
+
 
 void writeGrayB(ofstream& fout, image& data)
 {
@@ -269,7 +411,32 @@ void writeGrayB(ofstream& fout, image& data)
     }
 }
 
-bool outputType(char* type, ifstream &fin, ofstream &fout, image &data, char *fileOut)
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 5 arguments. The first is the output
+ *  type requested by the user, either --ascii or --binary.
+ *  The second is the output file variable.
+ *  The third is the structure containing the image data.
+ *  the fourth is the file that will be output.
+ *  This function will assess the output type, ascii or binary
+ *  and then it will append a .ppm to the output file name.
+ *  Finally, it will write out the contents of the structure
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    bool outCheck;
+    outCheck = outputType(type, fout, imgdata, fileout);
+
+    @endverbatim
+ ************************************************************************/
+
+bool outputType(char* type, ofstream &fout, image &data, char *fileOut)
 {
     char fileHolder[30];
     char color[10] = ".ppm";  
@@ -305,7 +472,32 @@ bool outputType(char* type, ifstream &fin, ofstream &fout, image &data, char *fi
     usageState();
 }
 
-bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut)
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes 5 arguments. The first is the output
+ *  type requested by the user, either --ascii or --binary.
+ *  The second is the output file variable.
+ *  The third is the structure containing the image data.
+ *  the fourth is the file that will be output.
+ *  This function will assess the output type, ascii or binary
+ *  and then it will append a .pgm to the output file name.
+ *  Finally, it will write out the contents of the structure
+ *  This function is meant for use to output grayscale images.
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    bool outCheck;
+    outCheck = outputGray(type, fout, imgdata, fileout);
+
+    @endverbatim
+ ************************************************************************/
+
+bool outGray(char* type, ofstream& fout, image& data, char* fileOut)
 {
     char fileHolder[30];
     char color[10] = ".pgm";

@@ -39,7 +39,7 @@ int main(int argc, char** argv)
             }
             value = atoi(argv[2]);
             Brighten(value, imgData);
-            output = outputType(argv[3], fin, fout, imgData, argv[4]);
+            output = outputType(argv[3], fout, imgData, argv[4]);
         }
     }
     if (argc == 5)
@@ -130,7 +130,7 @@ bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, o
         return false;
     }
     readFile(fin, data);
-    output = outputType(arg1, fin, fout, data, arg2);
+    output = outputType(arg1, fout, data, arg2);
     if (output == false)
     {
         return false;
@@ -230,7 +230,7 @@ bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofst
             return false;
         }
         negate(data);
-        output = outputType(arg2, fin, fout, data, arg3);
+        output = outputType(arg2, fout, data, arg3);
     }
     if (option == 3)
     {
@@ -243,7 +243,7 @@ bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofst
         newGreen = allocGreen(data.rows, data.cols);
         newBlue = allocBlue(data.rows, data.cols);
         sharpen(data, newRed, newGreen, newBlue);
-        output = outputType(arg2, fin, fout, data, arg3);
+        output = outputType(arg2, fout, data, arg3);
     }
     if (option == 4)
     {
@@ -256,7 +256,7 @@ bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofst
         newGreen = allocGreen(data.rows, data.cols);
         newBlue = allocBlue(data.rows, data.cols);
         smooth(data, newRed, newGreen, newBlue);
-        output = outputType(arg2, fin, fout, data, arg3);
+        output = outputType(arg2, fout, data, arg3);
     }
     if (option == 5)
     {
@@ -266,7 +266,7 @@ bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofst
             return false;
         }
         Grayscale(data);
-        output = outGray(arg2, fin, fout, data, arg3);
+        output = outGray(arg2, fout, data, arg3);
     }
     if (option == 6)
     {
@@ -277,7 +277,7 @@ bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofst
         }
         Grayscale(data);
         contrast(data);
-        output = outGray(arg2, fin, fout, data, arg3);
+        output = outGray(arg2, fout, data, arg3);
     }
     if (option == 0)
     {

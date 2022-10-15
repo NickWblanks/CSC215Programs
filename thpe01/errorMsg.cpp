@@ -28,7 +28,7 @@ void usageState()
     cout << "thpe01.exe [option] --outputtype basename image.ppm" << endl;
     cout << endl;
     cout << "Output Type" << endl;
-    cout << "       --ascii pixel values will be written in text form" << endl;
+    cout << "       --ascii  pixel values will be written in text form" << endl;
     cout << "       --binary pixel values will be written in binary form" << endl;
     cout << endl;
     cout << "Option Code" << endl;
@@ -196,6 +196,30 @@ bool invalidType(char* type)
     }
     return false;
 }
+
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function takes a single argument which is an integer.
+ *  It compares the integer to a set of values, 255 and 0.
+ *
+ *
+ *  @returns the integer input in. If the integer is within the
+ *  range of 0 and 255 nothing will happen. If it is over 255 it will
+ *  be changed to 255, if it is below 0 it will become 0.
+ *
+ *  @par Example
+ *  @verbatim
+
+    int val = 200;
+    val2 = valCheck(val);
+    return val2; //200
+
+    @endverbatim
+ ************************************************************************/
 
 int valCheck(int val)
 {

@@ -216,6 +216,29 @@ void Brighten( int val, image& data)
 }
 
 
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This fucntion takes 4 arguments, the first is the image data,
+ *  the second is the new Red array, the third is the new green, 
+ *  and the fourth is the new blue.
+ *  It will manipulate the values of the image, store them into the new
+ *  arrays and then use them to populate the imgData structure.
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    image imgData;
+    pixel ** newRed, newGreen, newBlue;
+    Sharpen(imgData,newRed, newGreen, newBlue);
+
+    @endverbatim
+ ************************************************************************/
+
+
 void sharpen(image& data, pixel** &Red, pixel** &Green, pixel** &Blue)
 {
     int i, j;
@@ -266,7 +289,7 @@ void sharpen(image& data, pixel** &Red, pixel** &Green, pixel** &Blue)
                 Green[i][j] = val2;
             }
         }
-    }//swap cols and rows
+    }
     for (i = 0; i < data.rows; i++)
     {
         for (j = 0; j < data.cols; j++)
@@ -294,6 +317,29 @@ void sharpen(image& data, pixel** &Red, pixel** &Green, pixel** &Blue)
         }
     }
 }
+
+
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This fucntion takes 4 arguments, the first is the image data,
+ *  the second is the new Red array, the third is the new green,
+ *  and the fourth is the new blue.
+ *  It will manipulate the values of the image, store them into the new
+ *  arrays and then use them to populate the imgData structure.
+ *
+ *
+ *  @par Example
+ *  @verbatim
+
+    image imgData;
+    pixel ** newRed, newGreen, newBlue;
+    smooth(imgData, newRed, newGreen, newBlue);
+
+    @endverbatim
+ ************************************************************************/
 
 
 void smooth(image& data, pixel**& Red, pixel**& Green, pixel**& Blue)

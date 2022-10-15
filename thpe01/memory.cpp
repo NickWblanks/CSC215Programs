@@ -241,6 +241,31 @@ void free2D(pixel** arr, int cols)
 }
 
 
+/** **********************************************************************
+ *  @author Nicholas K Wilk
+ *
+ *  @par Description
+ *
+ *  This function will take in 2 arguments, the first is the array to be allocated.
+ *  The second is the image data.
+ *  This is a boolean function whose purpose is to allocate
+ *  a new array to be used in image manipulation.
+ *
+ *
+ *  @returns True if the array successfully allocated, false if it fails.
+ *
+ * 
+ *  @par Example
+ *  @verbatim
+
+    bool goodAllocate;
+    goodAllocate = allocNArray(array, imgdata);
+    return goodAllocate;
+
+    @endverbatim
+ ************************************************************************/
+
+
 bool allocNArray(pixel ** &arr, image &data)
 {
     arr = allocRed(data.rows, data.cols);

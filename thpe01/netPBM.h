@@ -113,9 +113,9 @@ bool magicCheck(image& data);
 
 int optionCheck(char* option);
 
-bool outputType(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut);
+bool outputType(char* type, ofstream& fout, image& data, char* fileOut);
 
-bool outGray(char* type, ifstream& fin, ofstream& fout, image& data, char* fileOut);
+bool outGray(char* type, ofstream& fout, image& data, char* fileOut);
 
 bool invalidType(char* type);
 
