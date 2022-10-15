@@ -167,22 +167,16 @@ void readAscii(ifstream& fin, image &data)
 {
     int i = 0;
     int j = 0;
+    fin.ignore();
     int R, G, B = 0;
-    pixel r, g, b;
-    string com;
     for (i = 0; i < data.rows; i++)
     {
         for (j = 0; j < data.cols; j++)
         {
             fin >> R >> G >> B;
-            r = R;
-            g = G;
-            b = B;
-            data.redgray[i][j] = r;
-            data.green[i][j] = g;
-            data.blue[i][j] = b;
-            //cout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
-
+            data.redgray[i][j] = R;
+            data.green[i][j] = G;
+            data.blue[i][j] = B;
         }
     }
 }
@@ -208,15 +202,15 @@ void writeAscii(ofstream& fout, image &data)
 {
     int i, j;
     int max = 255;
-    fout << data.magicNumber << endl;
+    fout << data.magicNumber << '\n';
     fout << data.comment;
-    fout << data.cols << " " << data.rows << endl;
-    fout << max << endl;;
+    fout << data.cols << " " << data.rows << '\n';
+    fout << max << '\n';
     for (i = 0; i < data.rows; i++)
     {
         for (j = 0; j < data.cols; j++)
         {
-            fout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << endl;
+            fout << (int)data.redgray[i][j] << " " << (int)data.green[i][j] << " " << (int)data.blue[i][j] << '\n';
         }
     }
 }

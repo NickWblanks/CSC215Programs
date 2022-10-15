@@ -131,6 +131,7 @@ void contrast(image& data)
     minVal = min;
     maxVal = max;
     scale = 255.0 / (maxVal - minVal);
+    round(scale);
     for (i = 0; i < data.rows; i++)
     {
         for (j = 0; j < data.cols; j++)
