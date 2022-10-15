@@ -112,12 +112,12 @@ int main(int argc, char** argv)
 bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, ofstream& fout)
 {
     bool output, mCheck;
-    bool checkFile = openFile(fin, arg3);
+    bool checkFile = openBFile(fin, arg3);
     if (checkFile == false)
     {
         return false;
     }
-    readData(fin, data);
+    readHeader(fin, data);
     bool allocCheck = allocArray(data);
     if (allocCheck == false)
     {
@@ -169,8 +169,8 @@ bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, o
 bool readManip(image& data, ifstream& fin, char* file)
 {
     bool checkFile2, mCheck;
-    checkFile2 = openFile(fin, file); //argv[4]
-    readData(fin, data);
+    checkFile2 = openBFile(fin, file); //argv[4]
+    readHeader(fin, data);
     bool allocCheck = allocArray(data);
     if (allocCheck == false)
     {

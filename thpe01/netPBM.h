@@ -82,13 +82,12 @@ struct image
 
 //file functions
 
-bool openFile(ifstream& fin, char* fileName);
+
+bool openBFile(ifstream& fin, char* fileName);
 
 bool openBOut(ofstream& fout, char* fileName);
 
-bool openAOut(ofstream& fout, char* fileName);
-
-void readData(ifstream &fin, image &data);
+void readHeader(ifstream &fin, image &data);
 
 void readFile(ifstream& fin, image &data);
 

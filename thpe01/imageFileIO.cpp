@@ -27,7 +27,7 @@
  ************************************************************************/
 
 
-bool openFile(ifstream& fin, char *fileName)
+bool openBFile(ifstream& fin, char *fileName)
 {
     fin.open(fileName, ios::binary);
     if (!fin.is_open())
@@ -37,6 +37,7 @@ bool openFile(ifstream& fin, char *fileName)
     }
     return true;
 }
+
 
 
 /** **********************************************************************
@@ -80,42 +81,6 @@ bool openBOut(ofstream& fout, char* fileName)
  *
  *  @par Description
  *
- *  This function takes 2 arguments. The first is the output file
- *  stream containing the file to output to. The second is the file name.
- *  This function should only be used for outputting in ascii.
- *
- *
- *  @returns A boolean value, true or false. True if the
- *  file opened properly, false otherwise.
- *
- *  @par Example
- *  @verbatim
-
-    bool check;
-    check  = openAOut(fout, filename);
-    return check;
-
-    @endverbatim
- ************************************************************************/
-
-
-bool openAOut(ofstream& fout, char* fileName)
-{
-    fout.open(fileName);
-    if (!fout.is_open())
-    {
-        cout << "Unable to open file: " << fileName << endl;
-        return false;
-    }
-    return true;
-}
-
-
-/** **********************************************************************
- *  @author Nicholas K Wilk
- *
- *  @par Description
- *
  *  This function takes 2 arguments. The first is the input file
  *  stream containing the file with data to read. The second is the structure to
  *  be filled with data. This function fills the header elements of the image.
@@ -132,7 +97,7 @@ bool openAOut(ofstream& fout, char* fileName)
     @endverbatim
  ************************************************************************/
 
-void readData(ifstream& fin, image& data)
+void readHeader(ifstream& fin, image& data)
 {
     int max;
     string com;
@@ -445,7 +410,7 @@ bool outputType(char* type, ofstream &fout, image &data, char *fileOut)
         data.magicNumber = "P3";
         strcpy(fileHolder, fileOut);
         strcat(fileHolder, color);
-        bool checkFile2 = openAOut(fout, fileHolder);
+        bool checkFile2 = openBOut(fout, fileHolder);
         if (checkFile2 == false)
         {
             return false;
@@ -506,7 +471,7 @@ bool outGray(char* type, ofstream& fout, image& data, char* fileOut)
         data.magicNumber = "P2";
         strcpy(fileHolder, fileOut);
         strcat(fileHolder, color);
-        bool checkFile2 = openAOut(fout, fileHolder);
+        bool checkFile2 = openBOut(fout, fileHolder);
         if (checkFile2 == false)
         {
             return false;
