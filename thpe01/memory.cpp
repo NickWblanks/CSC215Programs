@@ -15,6 +15,9 @@
   *  These are used to dynamically allocate a 2d array to hold all
   *  the red values of the image.
   *
+  * 
+  *  @param[in] columns The columns (width) of the image.
+  *  @param[in] rows The rows (height) of the image.
   *
   *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
   *
@@ -69,6 +72,9 @@ pixel** allocRed( int columns, int rows)
  *  the green values of the image.
  *
  *
+ *  @param[in] columns The columns (width) of the image.
+ *  @param[in] rows The rows (height) of the image.
+ * 
  *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
  *
  *  @par Example
@@ -120,7 +126,10 @@ pixel** allocGreen( int columns, int rows)
  *  These are used to dynamically allocate a 2d array to hold all
  *  the blue values of the image.
  *
- *
+ *  @param[in] columns The columns (width) of the image.
+ *  @param[in] rows The rows (height) of the image.
+ * 
+ * 
  *  @returns a 2d pixel array pointer, where pixel is an unsigned char. It returns nullptr if it fails.
  *
  *  @par Example
@@ -172,6 +181,7 @@ pixel** allocBlue( int columns, int rows)
  *  the data of the image. This function will then call the three dynamic allocation
  *  functions to dynamically allocate all 3 arrays.
  *
+ *  @param[in] data The structure containing the data to be read from.
  *
  *  @returns True if all three arrays are successfully allocated, false if any fail..
  *
@@ -215,7 +225,10 @@ bool allocArray(image &data)
  *  This function has no return, it will delete the contents of a 2d array
  *  and then it will delete the array itself, and set it to nullptr.
  *
- *
+ *  @param[in] arr  A pixel pointer that stores the memory address of the 2d array.
+ *  @param[in] cols An integer representing the columns of the 2d array.
+ * 
+ * 
  *  @par Example
  *  @verbatim
 
@@ -251,6 +264,9 @@ void free2D(pixel** arr, int cols)
  *  This is a boolean function whose purpose is to allocate
  *  a new array to be used in image manipulation.
  *
+ * 
+ *  @param[in] arr  A pixel pointer that stores the memory address of the new 2d array.
+ *  @param[in] data the structure containing data to manipulate.
  *
  *  @returns True if the array successfully allocated, false if it fails.
  *

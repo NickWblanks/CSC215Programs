@@ -11,7 +11,10 @@
  *
  *  This function takes 2 arguments. The first is the input file
  *  stream containing the file to open. The second is the file name.
- *
+ *  
+ *  @param[in] fin An input file stream.
+ *  
+ *  @param[in] fileName The name of the file to read data from.
  *
  *  @returns A boolean value, true or false. True if the
  *  file opened properly, false otherwise.
@@ -49,6 +52,9 @@ bool openBFile(ifstream& fin, char *fileName)
  *  stream containing the file to output to. The second is the file name.
  *  This function should only be used for outputting in binary.
  *
+ *  @param[in] fout An output file stream.
+ *  
+ *  @param[in] fileName The name of the file to write data to.
  *
  *  @returns A boolean value, true or false. True if the
  *  file opened properly, false otherwise.
@@ -86,7 +92,9 @@ bool openBOut(ofstream& fout, char* fileName)
  *  be filled with data. This function fills the header elements of the image.
  *  The magic Number, comments, rows, and columns.
  *  
+ *  @param[in] fin An input file stream to read data from.
  *
+ *  @param[in] data The structure to hold the data.
  *
  *
  *  @par Example
@@ -127,6 +135,10 @@ void readHeader(ifstream& fin, image& data)
  *  in as ascii or binary.
  *
  *
+ *  @param[in] fin An input file stream to read data from.
+ *
+ *  @param[in] data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -160,7 +172,11 @@ void readFile(ifstream& fin, image &data)
  *  be filled with data. This function will read a file in as Ascii.
  *
  *
+ *  @param[in] fin An input file stream to read data from.
  *
+ *  @param[in] data The structure to hold the data.
+ * 
+ * 
  *  @par Example
  *  @verbatim
 
@@ -198,6 +214,10 @@ void readAscii(ifstream& fin, image &data)
  *  be filled with data. This function will read a file in as Binary.
  *
  *
+ *  @param[in] fin An input file stream to read data from.
+ *
+ *  @param[in] data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -235,6 +255,10 @@ void readBin(ifstream& fin, image &data)
  *  filled with data. This function will write to a file in Ascii.
  *
  *
+ *  @param[in] &fout An output file stream to write data to.
+ *
+ *  @param[in] &data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -272,6 +296,10 @@ void writeAscii(ofstream& fout, image &data)
  *  filled with data. This function will write to a file in Binary.
  *
  *
+ *  @param[in] fout An output file stream to write data to.
+ *
+ *  @param[in] data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -312,6 +340,10 @@ void writeBinary(ofstream& fout, image &data)
  *  This function only outputs the redgray array, and thus is used for grayscale.
  *
  *
+ *  @param[in] fout An output file stream to write data to.
+ *
+ *  @param[in] data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -349,6 +381,10 @@ void writeGray(ofstream& fout, image& data)
  *  This function only outputs the redgray array, and thus is used for grayscale.
  *
  *
+ *  @param[in] fout An output file stream to write data to.
+ *
+ *  @param[in] data The structure to hold the data.
+ * 
  *
  *  @par Example
  *  @verbatim
@@ -391,6 +427,17 @@ void writeGrayB(ofstream& fout, image& data)
  *  and then it will append a .ppm to the output file name.
  *  Finally, it will write out the contents of the structure
  *
+ *  @param[in] type A cstyle string containing the requested output type.
+ * 
+ *  @param[in] fout An output file stream to write data to
+ *  
+ *  @param[in] data The structure containing data to pull from.
+ * 
+ *  @param[in] fileOut The name of the file to be written to.
+ * 
+ * 
+ *  @returns A boolean value, true or false. True if the data has
+ *  been written sucessfully to the file
  *
  *  @par Example
  *  @verbatim
@@ -452,7 +499,18 @@ bool outputType(char* type, ofstream &fout, image &data, char *fileOut)
  *  Finally, it will write out the contents of the structure
  *  This function is meant for use to output grayscale images.
  *
- *
+ *  @param[in] type A cstyle string containing the requested output type.
+ * 
+ *  @param[in] fout An output file stream to write data to
+ *  
+ *  @param[in] data The structure containing data to pull from.
+ * 
+ *  @param[in] fileOut The name of the file to be written to.
+ * 
+ * 
+ *  @returns A boolean value, true or false. True if the data has
+ *  been written out to the file successfully.
+ * 
  *  @par Example
  *  @verbatim
 

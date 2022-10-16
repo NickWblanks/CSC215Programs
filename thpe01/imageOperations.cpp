@@ -14,7 +14,7 @@
   *  This function will take in the structure containing the data of the image
   *  and perform the --negate option. It has no return value.
   *  
-  *  
+  *  @param[in] data the structure containing data to manipulate.
   *
   *  @par Example
   *  @verbatim
@@ -49,7 +49,7 @@ void negate(image& data)
  *  This function will take in the structure containing the data of the image
  *  and perform the --grayscale option. It has no return value.
  *
- *
+ *  @param[in] data the structure containing data to manipulate.
  *
  *  @par Example
  *  @verbatim
@@ -89,7 +89,7 @@ void Grayscale(image& data)
  *  This function will take in the structure containing the data of the image
  *  and perform the --contrast option. It has no return value.
  *
- *
+ *  @param[in] data the structure containing data to manipulate.
  *
  *  @par Example
  *  @verbatim
@@ -152,8 +152,11 @@ void contrast(image& data)
  *  This function will take in the value to brighten, which is passed in through cmd line args. 
  *  The second argument is the structure containing the data of the image.
  *  It will perform the --brighten option. It has no return value.
+ *  The value specified must be between -255 and 255.
  *
  *
+ *  @param[in] val An integer value to brighten or darken the image..
+ *  @param[in] data the structure containing data to manipulate.
  *
  *  @par Example
  *  @verbatim
@@ -228,6 +231,12 @@ void Brighten( int val, image& data)
  *  arrays and then use them to populate the imgData structure.
  *
  *
+ *  @param[in] data the structure containing data to manipulate.  
+ *  @param[in] Red A new 2d pointer array representing the red spectrum..
+ *  @param[in] Green A new 2d pointer array representing the green spectrum.
+ *  @param[in] Blue A new 2d pointer array representing the blue spectrum.
+ * 
+ * 
  *  @par Example
  *  @verbatim
 
@@ -331,6 +340,12 @@ void sharpen(image& data, pixel** &Red, pixel** &Green, pixel** &Blue)
  *  arrays and then use them to populate the imgData structure.
  *
  *
+ *  @param[in] data the structure containing data to manipulate.  
+ *  @param[in] Red A new 2d pointer array representing the red spectrum..
+ *  @param[in] Green A new 2d pointer array representing the green spectrum.
+ *  @param[in] Blue A new 2d pointer array representing the blue spectrum.
+ * 
+ * 
  *  @par Example
  *  @verbatim
 

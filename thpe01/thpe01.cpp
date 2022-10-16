@@ -5,6 +5,29 @@
 
 #include "netPBM.h"
 
+ /** **********************************************************************
+  *  @author Nicholas K Wilk
+  *
+  *  @par Description
+  *
+  *  The Main function reads in data from the command line.
+  *  When the user accesses this program from the command line,
+  *  they must specify the arguments, those arguments are stored into
+  *  argc and argv.
+  *
+  *  @param[in] argc The number of arguments provided to the program.
+  *  @param[in] argv An array holding all of the arguments provided..
+  *
+  *  @returns An integer typically 0 if the program ran successfully.
+  *
+  *  @par Example
+  *  @verbatim
+
+     thpe01.exe --option --outtype outfile infile
+     Returns 0 if the program ran successfully.
+
+     @endverbatim
+  ************************************************************************/
 
 int main(int argc, char** argv)
 {
@@ -97,6 +120,14 @@ int main(int argc, char** argv)
  *  fout is the variable that holds the output file for writing (arg2).
  * 
  * 
+ *  @param[in] arg1 A cstyle string that represents the output type.
+ *  @param[in] arg2 A cstyle string that represents the output file.
+ *  @param[in] arg3 A cstyle string that represents the input file.
+ *  @param[in] data The structure to hold the image data.
+ *  @param[in] fin An input file stream variable.
+ *  @param[in] fout An output file stream variable.
+
+ * 
  *  @returns True or False. True if all tasks completed sucesfully, false if not.
  *
  *  @par Example
@@ -148,9 +179,9 @@ bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, o
  *  and the file to open. It is called to open and read the contents
  *  of the file to the structure. As well as checking if it is a valid image.
  *
- *  data is the structure containing the image data to be read in.
- *  fin is the variable to holds the input file for reading.
- *  file is a cstyle string holding the name of the file to open.
+ *  @param[in] data The structure containing the image data to be read in.
+ *  @param[in] fin The variable to holds the input file for reading.
+ *  @param[in] file A cstyle string holding the name of the file to open.
  *
  *  @returns True or False. True if the file was opened and contains a valid
  *  image, false if not.
@@ -202,6 +233,14 @@ bool readManip(image& data, ifstream& fin, char* file)
  *  fin is the variable to holds the input file for reading (arg3).
  *  fout is the variable that holds the output file for writing (arg2).
  *
+ *  @param[in] arg1 A cstyle string that represents the option.
+ *  @param[in] arg2 A cstyle string that represents the output type.
+ *  @param[in] arg3 A cstyle string that represents the output file.
+ *  @param[in] arg4 A cstyle string that represents the input file.
+ *  @param[in] fin An input file stream variable.
+ *  @param[in] fout An output file stream variable.
+ *  @param[in] data The structure to hold the data.
+ * 
  *  @returns True or False. True if all tasks completed sucesfully, false if not.
  *
  *  @par Example

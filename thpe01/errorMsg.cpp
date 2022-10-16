@@ -49,6 +49,8 @@ void usageState()
  *  It will return true or false based on whether the integer is in the
  *  range of 4 - 6 inclusive.
  * 
+ *  @param[in] cmdCount an integer to be passed in
+ * 
  *  @returns True if the number is between 4 and 6, false if not.
  *
  *  @par Example
@@ -83,6 +85,7 @@ bool cmdCheck(int cmdCount)
  *  containing the image data. It will check to see if the 
  *  Magic Number is one of P3, P6, P2, or P5.
  * 
+ *  @param[in] data The structure containing data to be read.
  *
  *  @returns True if the Magic Number is one of those values, false if not.
  *
@@ -115,7 +118,8 @@ bool magicCheck(image& data)
  *  This function takes a single argument which is the option 
  *  specified by the user.
  *
- *
+ *  @param[in] option An cstyle string to be passed in.
+ * 
  *  @returns An integer value representing the chosen option. 
  *  Will return 0 if its an invalid option.
  *
@@ -170,6 +174,8 @@ int optionCheck(char* option)
  *  This function takes a single argument which is the output type
  *  specified by the user.
  *
+ * 
+ *  @param[in] type A cstyle string to be passed in.
  *
  *  @returns A boolean value, true or false. True if the
  *  option is valid, false otherwise.
@@ -206,6 +212,7 @@ bool invalidType(char* type)
  *  This function takes a single argument which is an integer.
  *  It compares the integer to a set of values, 255 and 0.
  *
+ *  @param[in] val An integer to be passed in and checked.
  *
  *  @returns the integer input in. If the integer is within the
  *  range of 0 and 255 nothing will happen. If it is over 255 it will
