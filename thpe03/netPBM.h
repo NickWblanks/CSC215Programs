@@ -162,17 +162,11 @@ struct image
     pixel** blue;
 };
 
-struct color
-{
-    pixel red;
-    pixel green;
-    pixel blue;
-};
-
 #endif
 
 
 //file functions
+
 
 bool openBFile(ifstream& fin, char* fileName);
 
@@ -190,12 +184,24 @@ void readBin(ifstream& fin, image &data);
 
 void writeBinary(ofstream& fout, image &data);
 
+bool readManip(image& data, ifstream& fin, char* file);
+
 
 //error message functions
 
+void usageState();
+
+bool cmdCheck(int cmdCount);
+
+bool magicCheck(image& data);
+
+int optionCheck(char* option);
+
+bool outputType(char* type, ofstream& fout, image& data, char* fileOut);
 
 bool outGray(char* type, ofstream& fout, image& data, char* fileOut);
 
+bool invalidType(char* type);
 
 
 
@@ -216,7 +222,28 @@ bool allocNArray(pixel**& arr, image& data);
 
 //other functions
 
+
+bool noOptions(char* arg1, char* arg2, char* arg3, image& data, ifstream& fin, ofstream& fout);
+
+bool options(char* arg1, char* arg2, char* arg3, char* arg4, ifstream& fin, ofstream& fout, image& data);
+
+int valCheck(int val);
+
+
+// operations functions
+
+void negate(image& data);
+
+void Grayscale(image& data);
+
 void writeGray(ofstream& fout, image& data);
 
 void writeGrayB(ofstream& fout, image& data);
 
+void Brighten(int val, image& data);
+
+void contrast(image& data);
+
+void sharpen(image& data, pixel** &Red, pixel** &Green, pixel** &Blue);
+
+void smooth(image& data, pixel**& Red, pixel**& Green, pixel**& Blue);

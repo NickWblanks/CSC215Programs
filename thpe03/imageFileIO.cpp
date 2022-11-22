@@ -75,7 +75,7 @@ bool openBOut(ofstream& fout, char* fileName)
     fout.open(fileName, ios::ate | ios::binary);
     if (!fout.is_open())
     {
-        cout << "Unable to open output file: " << fileName << endl;
+        cout << "Unable to open file: " << fileName << endl;
         return false;
     }
     return true;
@@ -480,6 +480,8 @@ bool outputType(char* type, ofstream &fout, image &data, char *fileOut)
         return true;
     }
     return false;
+    cout << "Invalid Startup" << endl;
+    usageState();
 }
 
 /** **********************************************************************
@@ -549,6 +551,8 @@ bool outGray(char* type, ofstream& fout, image& data, char* fileOut)
         return true;
     }
     return false;
+    cout << "Invalid Startup" << endl;
+    usageState();
 }
 
 
