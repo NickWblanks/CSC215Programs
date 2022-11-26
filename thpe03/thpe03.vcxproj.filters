@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\thpe01\netPBM.h">
+    <ClInclude Include="netPBM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

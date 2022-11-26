@@ -135,7 +135,7 @@
     <ClCompile Include="thpe03Funct.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\thpe01\netPBM.h" />
+    <ClInclude Include="netPBM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
