@@ -30,6 +30,8 @@ public:
     bool front(card &item);
     int size( );
     bool empty( );
+    void print(ostream &out);
+
 
 private:
 

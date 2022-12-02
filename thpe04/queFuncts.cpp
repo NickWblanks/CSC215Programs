@@ -92,3 +92,16 @@ bool queue::front(card &item)
     item = headptr->theCard; //stores first in list in param
     return true;
 }
+
+void queue::print(ostream &out)
+{
+    node* temp;
+    temp = headptr;
+    out << "Face Value" << " -- " << "Suit" << endl;
+    while (temp != nullptr)
+    {
+        out << temp->theCard.faceValue << " -- " 
+            << temp->theCard.suit << endl;
+        temp = temp->next;
+    }
+}

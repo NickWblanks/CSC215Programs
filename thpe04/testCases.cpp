@@ -82,11 +82,27 @@ TEST_CASE("front - good list")
 {
     card item, item2;
     queue que2;
-    bool check;
     item.faceValue = 13;
     item.suit = 2;
     que2.push(item);
     que2.front(item2);
     CHECK(que2.size() == 1);
     CHECK(item2.faceValue == 13);
+}
+
+TEST_CASE("print - cout it")
+{
+    card item, item2, item3;
+    queue que1;
+    item.faceValue = 11;
+    item.suit = 1;
+    item2.faceValue = 4;
+    item2.suit = 0;
+    item3.faceValue = 3;
+    item3.suit = 1;
+    que1.push(item);
+    que1.push(item2);
+    que1.push(item3);
+    que1.print(cout);
+    CHECK(que1.size() == 3);
 }
