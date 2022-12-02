@@ -30,12 +30,12 @@ void runSeed(int seed1, int seed2)
     card deck1[110];
     card deck2[110];
     bool check1, check2;
-    check1 = fillDeck(deck1, seed1, 110);
+    check1 = fillDeckS(deck1, seed1, 110);
     if (check1 == false)
     {
         return;
     }
-    check2 = fillDeck(deck2, seed2, 110);
+    check2 = fillDeckS(deck2, seed2, 110);
     if (check2 == false)
     {
         return;
@@ -47,7 +47,7 @@ void runFile(char *file1, char *file2)
 
 }
 
-bool fillDeck(card deck[], int seed, int size)
+bool fillDeckS(card deck[], int seed, int size)
 {
     int i, j, indCard;
     int suit, value;

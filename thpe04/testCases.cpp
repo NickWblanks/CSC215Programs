@@ -68,3 +68,25 @@ TEST_CASE("Pop - remove all from list")
     CHECK(extra.faceValue == 12);
     CHECK(extra3.suit == 2);
 }
+
+TEST_CASE("front - empty list")
+{
+    card item;
+    queue que2;
+    bool check;
+    check = que2.front(item);
+    CHECK(check == false);   
+}
+
+TEST_CASE("front - good list")
+{
+    card item, item2;
+    queue que2;
+    bool check;
+    item.faceValue = 13;
+    item.suit = 2;
+    que2.push(item);
+    que2.front(item2);
+    CHECK(que2.size() == 1);
+    CHECK(item2.faceValue == 13);
+}

@@ -27,7 +27,7 @@ public:
 
     bool pop(card &item);
     bool push(card item);
-    bool front(card item);
+    bool front(card &item);
     int size( );
     bool empty( );
 
@@ -39,15 +39,7 @@ private:
         node* next;
     };
     node *headptr;
-    node *tailptr;
-
-
-
-
-
-
-
-    
+    node *tailptr;    
 };
 
 
@@ -63,4 +55,4 @@ void runSeed(int seed1, int seed2);
 
 void runFile(char* file1, char* file2);
 
-bool fillDeck(card deck[], int seed, int size);
+bool fillDeckS(card deck[], int seed, int size);

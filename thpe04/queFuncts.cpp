@@ -82,3 +82,13 @@ bool queue::pop(card &item)
     delete temp;
     return true;
 }
+
+bool queue::front(card &item)
+{
+    if (empty() == true)
+    {
+        return false;
+    }
+    item = headptr->theCard; //stores first in list in param
+    return true;
+}

@@ -14,8 +14,6 @@ int main(int argc, char** argv)
         return 0;
     }
     int seed1, seed2;
-    bool check;
-    card deck1[52];
     int checkCmd = CmdCheck(argc, argv[1]);
     if (checkCmd == 0)
     {
