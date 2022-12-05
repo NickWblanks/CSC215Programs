@@ -14,6 +14,8 @@ int main(int argc, char** argv)
         return 0;
     }
     int seed1, seed2;
+    seed1 = 0;
+    seed2 = 0; //initialize seeds at 0 if running from files.
     int checkCmd = CmdCheck(argc, argv[1]);
     if (checkCmd == 0)
     {
@@ -22,7 +24,7 @@ int main(int argc, char** argv)
     }
     if (strcmp(argv[1], "-s") == 0)
     {
-        seed1 = stoi(argv[2]);
+        seed1 = stoi(argv[2]);//obtains seed vals
         seed2 = stoi(argv[3]);
     }
     chooseRun(argv[1], seed1, seed2, argv[2], argv[3]);

@@ -106,3 +106,25 @@ TEST_CASE("print - cout it")
     que1.print(cout);
     CHECK(que1.size() == 3);
 }
+
+TEST_CASE("sameCheck - not in queue")
+{
+    card item1, item2, testItem;
+    queue que1;
+    bool check;
+    item1.faceValue = 7;
+    item1.suit = 3;
+    item2.faceValue = 6;
+    item2.suit = 2;
+    testItem.faceValue = 13;
+    testItem.suit = 1;
+    que1.push(item1);
+    que1.push(item2);
+    check = que1.SameCheck(testItem);
+    if (check == true)
+    {
+        que1.push(testItem);
+    }
+    CHECK(que1.size() == 3);
+
+}

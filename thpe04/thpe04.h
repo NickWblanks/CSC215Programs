@@ -8,7 +8,7 @@
 #include <string>
 #include <random>
 
-const bool RUNCATCH = true;
+const bool RUNCATCH = false;
 
 
 using namespace std;
@@ -31,6 +31,8 @@ public:
     int size( );
     bool empty( );
     void print(ostream &out);
+    bool SameCheck(card item);//finds if card already exists in deck.
+
 
 
 private:
@@ -57,4 +59,6 @@ void runSeed(int seed1, int seed2);
 
 void runFile(char* file1, char* file2);
 
-bool fillDeckS(card deck[], int seed, int size);
+bool fillDeckS(queue deck, int seed);
+
+bool fillDeckF(ifstream& fin, queue deck);

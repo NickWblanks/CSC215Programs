@@ -105,3 +105,19 @@ void queue::print(ostream &out)
         temp = temp->next;
     }
 }
+
+bool queue::SameCheck(card item)
+{
+    node* temp;
+    temp = headptr;
+    while (temp != nullptr)
+    {
+        if (temp->theCard.faceValue == item.faceValue &&
+            temp->theCard.suit == item.suit)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}

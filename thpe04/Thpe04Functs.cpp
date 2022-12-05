@@ -27,54 +27,97 @@ void chooseRun(char* option, int s1, int s2, char* file1, char* file2)
 
 void runSeed(int seed1, int seed2)
 {
-    card deck1[110];
-    card deck2[110];
+    queue deck1;
+    queue deck2;
     bool check1, check2;
-    check1 = fillDeckS(deck1, seed1, 110);
+    check1 = fillDeckS(deck1, seed1);
     if (check1 == false)
     {
         return;
     }
-    check2 = fillDeckS(deck2, seed2, 110);
+    check2 = fillDeckS(deck2, seed2);
     if (check2 == false)
     {
         return;
     }
 }
 
-void runFile(char *file1, char *file2)
+void runFile(char *file1, char *file2, ifstream &fin)
 {
+    fin.open(file1);
+    if (!fin.is_open())
+    {
+        cout << "Unable to open file." << endl;
+        return;
+    }
+    fin.open(file2);
+    if (!fin.is_open())
+    {
+        cout << "Unable to open file." << endl;
+        return;
+    }
+    queue deck1, deck2;
+    bool check1, check2;
+    check1 = fillDeckF(fin, deck1);
+    if (check1 == false)
+    {
+        return;
+    }
+    check2 = fillDeckF(fin, deck2);
+    if (check2 == false)
+    {
+        return;
+    }
 
 }
 
-bool fillDeckS(card deck[], int seed, int size)
+bool fillDeckS(queue deck, int seed)
 {
-    int i, j, indCard;
+    int i, indCard;
+    i = 0;
     int suit, value;
-    card temp, oldCard;
-    for (i = 0; i < size; i++)
+    card newCard;
+    indCard = getCard(seed);
+    suit = indCard / 13;
+    value = indCard % 13;
+    newCard.faceValue = value;
+    newCard.suit = suit;
+    deck.push(newCard);
+    while (i < 52)
     {
         indCard = getCard(seed);
         suit = indCard / 13;
         value = indCard % 13;
-        temp.faceValue = value;
-        temp.suit = suit;
-        for (j = 0; j < 52; j++)
+        newCard.faceValue = value;
+        newCard.suit = suit;
+        while(deck.SameCheck(newCard) == true)
         {
-            oldCard = deck[j];
-            if (temp.faceValue == oldCard.faceValue && temp.suit == oldCard.suit)
-            {
-                indCard = getCard(seed);
-                suit = indCard / 13;
-                value = indCard % 13;
-                temp.faceValue = value;
-                temp.suit = suit;
-                j = -1;
-            }
+            indCard = getCard(seed);
+            suit = indCard / 13;
+            value = indCard % 13;
+            newCard.faceValue = value;
+            newCard.suit = suit;
         }
-        deck[i] = temp;
+        deck.push(newCard);
+        i++;
     }
+    deck.print(cout);
     return true;
+}
+
+bool fillDeckF(ifstream &fin, queue deck)
+{
+    card cardIn;
+    int card, suit, value;
+    while (fin >> card)
+    {
+        suit = card / 13;
+        value = card % 13;
+        cardIn.suit = suit;
+        cardIn.faceValue = value;
+        deck.push(cardIn);
+    }
+    deck.print(cout);
 }
 
 int getCard(int seed)
@@ -84,7 +127,7 @@ int getCard(int seed)
     return deck(engine);
 }
 
-void WAR(card deck1[], card deck2[])
+void WAR(queue deck1, queue deck2)
 {
 
 }
