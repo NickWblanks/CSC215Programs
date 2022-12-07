@@ -6,6 +6,33 @@ queue::queue() //constructor
     tailptr = nullptr;
 }
 
+queue::queue(queue& q)
+{
+    if (q.empty() == true)
+    {
+        headptr = nullptr;
+        return;
+    }
+    headptr = nullptr;
+    node* copy = q.headptr;
+    node* paste;
+
+    headptr = new (nothrow) node;
+    headptr->theCard = copy->theCard;//copy 1 item in.
+    headptr->next = nullptr;
+
+    copy = q.headptr->next; //seek next item
+    paste = headptr;
+    while (copy != nullptr) //if next is null drop out
+    {
+        paste->next = new (nothrow) node;
+        paste = paste->next;
+        paste->theCard = copy->theCard;
+        paste->next = nullptr;
+        copy = copy->next;
+    }
+}
+
 queue::~queue() //destructor
 {
     node* temp;

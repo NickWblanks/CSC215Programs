@@ -8,7 +8,7 @@
 #include <string>
 #include <random>
 
-const bool RUNCATCH = false;
+const bool RUNCATCH = true;
 
 
 using namespace std;
@@ -23,6 +23,7 @@ class queue
 {
 public:
     queue( );
+    queue(queue &q);
     ~queue( );
 
     bool pop(card &item);
@@ -53,12 +54,12 @@ void usageStatement();
 
 int CmdCheck(int count, char* arg1);
 
-void chooseRun(char* option, int s1, int s2, char *file1, char *file2);
+void chooseRun(char* option, int s1, int s2, char* file1, char* file2, ifstream& fin);
 
 void runSeed(int seed1, int seed2);
 
-void runFile(char* file1, char* file2);
+void runFile(char* file1, char* file2, ifstream& fin);
 
-bool fillDeckS(queue deck, int seed);
+void fillDeckS(queue &deck, int seed);
 
-bool fillDeckF(ifstream& fin, queue deck);
+void fillDeckF(ifstream& fin, queue &deck);

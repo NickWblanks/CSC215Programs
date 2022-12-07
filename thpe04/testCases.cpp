@@ -121,10 +121,23 @@ TEST_CASE("sameCheck - not in queue")
     que1.push(item1);
     que1.push(item2);
     check = que1.SameCheck(testItem);
-    if (check == true)
+    if (check == false)
     {
         que1.push(testItem);
     }
     CHECK(que1.size() == 3);
+}
 
+TEST_CASE("fillDeckS - checking to see if it fills up to 52")
+{
+    queue deck1;
+    int seed = 94850;
+    bool check;
+    int qSize;
+    fillDeckS(deck1, seed);
+    check = deck1.empty();
+    qSize = deck1.size();
+    deck1.print(cout);
+    CHECK(qSize == 52);
+    CHECK(check == false);
 }
