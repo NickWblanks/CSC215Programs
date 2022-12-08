@@ -2,7 +2,7 @@
 
 TEST_CASE("queue - insert empty")
 {
-    queue que1;
+    queue<card> que1;
     card card1;
     card1.faceValue = 12;
     card1.suit = 3;
@@ -11,7 +11,7 @@ TEST_CASE("queue - insert empty")
 
 TEST_CASE("queue - insert 1 item in")
 {
-    queue que1;
+    queue<card> que1;
     card card1, card2, card3;
     card1.faceValue = 12;
     card1.suit = 3;
@@ -27,8 +27,10 @@ TEST_CASE("queue - insert 1 item in")
 
 TEST_CASE("pop - remove from empty list")
 {
-    queue que2;
+    queue<card> que2;
     card badItem;
+    badItem.faceValue = 0;
+    badItem.suit = 0;
     bool check;
     check = que2.pop(badItem);
     CHECK(check == false);
@@ -36,8 +38,10 @@ TEST_CASE("pop - remove from empty list")
 
 TEST_CASE("pop - remove last in list")
 {
-    queue que3;
+    queue<card> que3;
     card last, item;
+    item.faceValue = 0;
+    item.suit = 0;
     bool check;
     last.faceValue = 11;
     last.suit = 2;
@@ -45,13 +49,17 @@ TEST_CASE("pop - remove last in list")
     check = que3.pop(item);
     CHECK(check == true);
     CHECK(que3.size() == 0);
+    CHECK(item.faceValue == 11);
 }
 
 
 TEST_CASE("Pop - remove all from list")
 {
-    queue que1;
+    queue<card> que1;
     card card1, card2, card3, extra, extra2, extra3;
+    extra.faceValue = 0;
+    extra.suit = 0;
+    extra3 = extra2 = extra;
     card1.faceValue = 12;
     card1.suit = 3;
     card2.faceValue = 9;
@@ -72,7 +80,9 @@ TEST_CASE("Pop - remove all from list")
 TEST_CASE("front - empty list")
 {
     card item;
-    queue que2;
+    item.faceValue = 0;
+    item.suit = 0;
+    queue<card> que2;
     bool check;
     check = que2.front(item);
     CHECK(check == false);   
@@ -81,19 +91,21 @@ TEST_CASE("front - empty list")
 TEST_CASE("front - good list")
 {
     card item, item2;
-    queue que2;
-    item.faceValue = 13;
+    item2.faceValue = 0;
+    item2.suit = 0;
+    queue<card> que2;
+    item.faceValue = 12;
     item.suit = 2;
     que2.push(item);
     que2.front(item2);
     CHECK(que2.size() == 1);
-    CHECK(item2.faceValue == 13);
+    CHECK(item2.faceValue == 12);
 }
 
 TEST_CASE("print - cout it")
 {
     card item, item2, item3;
-    queue que1;
+    queue<card> que1;
     item.faceValue = 11;
     item.suit = 1;
     item2.faceValue = 4;
@@ -110,7 +122,7 @@ TEST_CASE("print - cout it")
 TEST_CASE("sameCheck - not in queue")
 {
     card item1, item2, testItem;
-    queue que1;
+    queue<card> que1;
     bool check;
     item1.faceValue = 7;
     item1.suit = 3;
@@ -130,14 +142,134 @@ TEST_CASE("sameCheck - not in queue")
 
 TEST_CASE("fillDeckS - checking to see if it fills up to 52")
 {
-    queue deck1;
+    queue<card> deck1;
     int seed = 94850;
     bool check;
     int qSize;
     fillDeckS(deck1, seed);
     check = deck1.empty();
     qSize = deck1.size();
-    deck1.print(cout);
     CHECK(qSize == 52);
     CHECK(check == false);
 }
+
+TEST_CASE("FillDeckF - running file1")
+{
+    int qSize;
+    queue<card> deck;
+    ifstream fin;
+    string fileName;
+    fileName = "Deck1.cards";
+    fin.open(fileName);
+    if (!fin.is_open())
+    {
+        cout << "Unable to open File." << endl;
+    }
+    fillDeckF(fin, deck);
+    qSize = deck.size();
+    CHECK(qSize == 52);
+    CHECK(deck.empty() == false);
+}
+
+TEST_CASE("playRound - p2 wins after 2 rounds")
+{
+    int i;
+    queue<card> deck1, deck2;
+    card card1;
+    int p1[2] = { 4, 8 };
+    int p2[2] = { 2, 7 };
+    for (i = 0; i < 2; i++)
+    {
+        card1.faceValue = p1[i];
+        card1.suit = 0;
+        deck1.push(card1);
+    }
+    for (i = 0; i < 2; i++)
+    {
+        card1.faceValue = p2[i];
+        card1.suit = 0;
+        deck2.push(card1);
+    }
+    playRound(deck1, deck2);
+    CHECK(deck2.size() == 1);
+    CHECK(deck1.size() == 3);
+}
+
+TEST_CASE("playRound - tied first, pull 2 more, p2 wins")
+{
+    int i;
+    queue<card> deck1, deck2;
+    card card1;
+    int p1[10] = { 4, 8, 6, 5 ,11, 2, 7, 1, 0, 3};
+    int p2[10] = { 4, 9, 8, 8, 2, 1, 11, 12, 4, 5 };
+    for (i = 0; i < 10; i++)
+    {
+        card1.faceValue = p1[i];
+        card1.suit = 0;
+        deck1.push(card1);
+    }
+    for (i = 0; i < 10; i++)
+    {
+        card1.faceValue = p2[i];
+        card1.suit = 0;
+        deck2.push(card1);
+    }
+    playRound(deck1, deck2);
+    deck1.print(cout);
+    deck2.print(cout);
+    CHECK(deck2.size() == 14);
+    CHECK(deck1.size() == 6);
+}
+
+TEST_CASE("playRound - tied first, not enough cards, p2 wins")
+{
+    int i;
+    queue<card> deck1, deck2;
+    card card1;
+    int p1[10] = { 4, 8, 6 };
+    int p2[10] = { 4, 9, 8 };
+    for (i = 0; i < 3; i++)
+    {
+        card1.faceValue = p1[i];
+        card1.suit = 0;
+        deck1.push(card1);
+    }
+    for (i = 0; i < 3; i++)
+    {
+        card1.faceValue = p2[i];
+        card1.suit = 0;
+        deck2.push(card1);
+    }
+    playRound(deck1, deck2);
+    deck1.print(cout);
+    deck2.print(cout);
+    CHECK(deck2.size() == 6);
+    CHECK(deck1.size() == 0);
+}
+
+TEST_CASE("playRound - tied first, p1 not enough cards, p2 wins")
+{
+    int i;
+    queue<card> deck1, deck2;
+    card card1;
+    int p1[10] = { 4, 8, 6 };
+    int p2[10] = { 4, 9, 8, 10, 11, 2, 1 };
+    for (i = 0; i < 3; i++)
+    {
+        card1.faceValue = p1[i];
+        card1.suit = 0;
+        deck1.push(card1);
+    }
+    for (i = 0; i < 7; i++)
+    {
+        card1.faceValue = p2[i];
+        card1.suit = 0;
+        deck2.push(card1);
+    }
+    playRound(deck1, deck2);
+    deck1.print(cout);
+    deck2.print(cout);
+    CHECK(deck2.size() == 10);
+    CHECK(deck1.size() == 0);
+}
+

@@ -18,9 +18,6 @@
     <ClCompile Include="thpe04.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExtraFuncts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Thpe04Functs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

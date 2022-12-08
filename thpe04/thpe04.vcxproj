@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ExtraFuncts.cpp" />
     <ClCompile Include="queFuncts.cpp" />
     <ClCompile Include="testCases.cpp" />
     <ClCompile Include="thpe04.cpp" />

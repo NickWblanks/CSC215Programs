@@ -1,150 +1,143 @@
+/** **********************************************************************
+ * @file
+ ************************************************************************/
+
 #include "thpe04.h"
 
-queue::queue() //constructor
+/** **********************************************************************
+ * @author Nicholas Wilk
+ * 
+ * @par Description
+ * The overloaded operator = for the card structure.
+ * It assigns both the face value and the suit to the new card.
+ * 
+ * @param[in] rhs the right hand side of the = operator.
+ * 
+ * @returns A card with the contents of the right hand sided card.
+ * 
+ ************************************************************************/
+
+card card::operator=(const card rhs)
 {
-    headptr = nullptr;
-    tailptr = nullptr;
+    faceValue = rhs.faceValue;
+    suit = rhs.suit;
+    return *this;
 }
 
-queue::queue(queue& q)
+/** **********************************************************************
+ * @author Nicholas Wilk
+ *
+ * @par Description
+ * The overloaded operator == for the card structure.
+ * It checks if both the face value and suit are the same.
+ *
+ * @param[in] right the right hand side of the = operator.
+ *
+ * @returns True/False true if they are the same, false if not.
+ *
+ ************************************************************************/
+
+bool card::operator==( const card right)
 {
-    if (q.empty() == true)
-    {
-        headptr = nullptr;
-        return;
-    }
-    headptr = nullptr;
-    node* copy = q.headptr;
-    node* paste;
-
-    headptr = new (nothrow) node;
-    headptr->theCard = copy->theCard;//copy 1 item in.
-    headptr->next = nullptr;
-
-    copy = q.headptr->next; //seek next item
-    paste = headptr;
-    while (copy != nullptr) //if next is null drop out
-    {
-        paste->next = new (nothrow) node;
-        paste = paste->next;
-        paste->theCard = copy->theCard;
-        paste->next = nullptr;
-        copy = copy->next;
-    }
+    return faceValue == right.faceValue && suit == right.suit;
 }
 
-queue::~queue() //destructor
+/** **********************************************************************
+ * @author Nicholas Wilk
+ *
+ * @par Description
+ * The overloaded operator = for the card2 structure.
+ * It assigns both the face value and the suit to the new card.
+ *
+ * @param[in] rhs the right hand side of the = operator.
+ *
+ * @returns A card2 with the contents of the right hand sided card.
+ *
+ ************************************************************************/
+
+card2 card2::operator=(const card2 rhs)
 {
-    node* temp;
-    while (headptr != nullptr)
-    {
-        temp = headptr;;
-        headptr = temp->next;
-        delete temp;
-    }
+    face = rhs.face;
+    suit = rhs.suit;
+    return *this;
 }
 
-bool queue::empty() //checks for an empty list
+/** **********************************************************************
+ * @author Nicholas Wilk
+ *
+ * @par Description
+ * The overloaded operator == for the card2 structure.
+ * It checks if both the face value and suit are the same.
+ *
+ * @param[in] right the right hand side of the = operator.
+ *
+ * @returns True/False true if they are the same, false if not.
+ *
+ ************************************************************************/
+
+
+bool card2::operator==(const card2 right)
 {
-    if (headptr == nullptr)
-    {
-        return true;
-    }
-    return false;
+    return face == right.face && suit == right.suit;
 }
 
-int queue::size() //returns list size
-{
-    node* temp;
-    temp = headptr;
-    int count = 0;
-    if (headptr == nullptr) //empty list
-    {
-        return count;
-    }
-    while (temp != nullptr) //traverse list until end.
-    {
-        temp = temp->next;
-        count++;
-    }
-    return count;
-}
 
-bool queue::push(card item)  //enque/insert, only inserts at end.
-{
-    node* temp;
-    node* prev = headptr;
-    node* curr = headptr;
-    temp = new (nothrow) node;
-    if (temp == nullptr)
-    {
-        return false;
-    }
-    temp->theCard.faceValue = item.faceValue;
-    temp->theCard.suit = item.suit;
-    temp->next = nullptr;
-    if (empty() == true)//insert empty
-    {
-        headptr = temp;
-        tailptr = temp;
-        return true;
-    }
-    //insert end
-    tailptr->next = temp;
-    tailptr = temp;
-    return true;
-}
+/** **********************************************************************
+ * @author Nicholas Wilk
+ *
+ * @par Description
+ * The overloaded friend operator << for the queue class.
+ * It outputs the class in a specific way. Only works for the card structure.
+ *
+ * @param[in] out The output type.
+ * 
+ * @param[in] q the queue to output.
+ *
+ * @returns The ostream, the output to whichever platform.
+ *
+ ************************************************************************/
 
-bool queue::pop(card &item)
-{
-    node* temp;
-    temp = headptr;
-    int fNum = 1;
-    if (empty() == true) //cant remove from empty list
-    {
-        return false;
-    }
-    item = headptr->theCard; //stores first in list in param
-    headptr = headptr->next;//removes front item
-    delete temp;
-    return true;
-}
 
-bool queue::front(card &item)
+ostream& operator<< (ostream& out, const queue<card>& q)
 {
-    if (empty() == true)
-    {
-        return false;
-    }
-    item = headptr->theCard; //stores first in list in param
-    return true;
-}
-
-void queue::print(ostream &out)
-{
-    node* temp;
-    temp = headptr;
-    out << "Face Value" << " -- " << "Suit" << endl;
+    queue<card>::node* temp;
+    temp = q.headptr;
     while (temp != nullptr)
     {
-        out << temp->theCard.faceValue << " -- " 
+        out << temp->theCard.faceValue
+            << " -- " << temp->theCard.suit << endl;
+        temp = temp->next;
+    }
+    return out;
+}
+
+/** **********************************************************************
+ * @author Nicholas Wilk
+ *
+ * @par Description
+ * The overloaded friend operator << for the queue class.
+ * It outputs the class in a specific way. Only works with the 
+ * card2 structure.
+ *
+ * @param[in] out The output type.
+ *
+ * @param[in] q the queue to output.
+ *
+ * @returns The ostream, the output to whichever platform.
+ *
+ ************************************************************************/
+
+ostream& operator<< (ostream& out, const queue<card2>& q)
+{
+    queue<card2>::node* temp;
+    temp = q.headptr;
+    while (temp != nullptr)
+    {
+        out << temp->theCard.face << " of " 
             << temp->theCard.suit << endl;
         temp = temp->next;
     }
+    return out;
 }
 
-bool queue::SameCheck(card item)
-{
-    node* temp;
-    temp = headptr;
-    while (temp != nullptr)
-    {
-        if (temp->theCard.faceValue == item.faceValue &&
-            temp->theCard.suit == item.suit)
-        {
-            return true;
-        }
-        temp = temp->next;
-    }
-    return false;
-}
+
